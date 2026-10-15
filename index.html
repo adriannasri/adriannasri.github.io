@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<meta name="description" content="Portfolio de Adrián Nasri Escarti, estudiante de DAM en Digitech FP: backend, apps multiplataforma y el robot finalista del ASTI Robotics Challenge 2026.">
+<meta property="og:title" content="Adrián Nasri Escarti">
+<meta property="og:description" content="Portfolio de Adrián Nasri Escarti, estudiante de DAM en Digitech FP: backend, apps multiplataforma y el robot finalista del ASTI Robotics Challenge 2026.">
+<meta property="og:image" content="https://adrian1glitch.github.io/media/robot-pista.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%2314213D%22/%3E%3Crect x=%229%22 y=%225%22 width=%2214%22 height=%2222%22 rx=%222%22 fill=%22%23F2B705%22/%3E%3Crect x=%224%22 y=%227%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3Crect x=%2224%22 y=%227%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3Crect x=%224%22 y=%2218%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3Crect x=%2224%22 y=%2218%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3C/svg%3E">
+<title>Adrián Nasri Escarti</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una pista de siguelíneas recorre la página (línea negra a la izquierda) y un pequeño robot la sigue al hacer scroll.
+   Bloques con borde negro y sombra dura, amarillo + negro + azul cobalto, como la señalética de una competición. */
+:root{
+  --bg:#F7F6F2; --paper:#FFFFFF; --ink:#14213D; --muted:#586379; --soft:#E7E4DA; --edge:#14213D;
+  --plate:#14213D; --plate-ink:#F7F6F2; --accent:#F2B705; --accent-ink:#14213D; --accent-text:#8A6400; --ok:#2F7A3D; --warn:#B4431A;
+  --font:"Archivo","Arial Narrow",Arial,sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,monospace;
+  --rail:44px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1424; --paper:#161E33; --ink:#ECEFF5; --muted:#A2ACC0; --soft:#24304A; --edge:#3B4A6E;
+  --plate:#1C2742; --plate-ink:#ECEFF5; --accent:#F5C02E; --accent-ink:#14213D; --accent-text:#F5C02E; --ok:#7FD08F; --warn:#F0A060; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1424; --paper:#161E33; --ink:#ECEFF5; --muted:#A2ACC0; --soft:#24304A; --edge:#3B4A6E;
+  --plate:#1C2742; --plate-ink:#ECEFF5; --accent:#F5C02E; --accent-ink:#14213D; --accent-text:#F5C02E; --ok:#7FD08F; --warn:#F0A060; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--font)}
+p{margin:0}
+h1,h2,h3{margin:0;text-wrap:balance}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.02em}
+
+/* Barra superior */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--plate);color:var(--plate-ink);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar-in{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:12px}
+.brand{font-weight:800;font-stretch:118%;text-decoration:none;letter-spacing:.01em}
+.bar nav{display:flex;gap:4px 20px;flex-wrap:wrap;font-weight:600;font-size:15px}
+.bar nav a{text-decoration:none}
+.bar nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.stripe{height:8px;background:repeating-linear-gradient(-45deg,var(--plate) 0 12px,var(--accent) 12px 24px)}
+
+/* Pista */
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.track{display:grid;grid-template-columns:var(--rail) 1fr;gap:0 28px}
+.rail{position:relative}
+.rail::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:7px;transform:translateX(-50%);background:var(--ink)}
+.bot{position:sticky;top:calc(50vh - 35px);margin:40px auto 0;width:48px;height:70px;z-index:1;display:block}
+.bot svg{width:100%;height:100%;display:block;overflow:visible}
+.bot svg{filter:drop-shadow(3px 3px 0 color-mix(in srgb,var(--ink) 25%,transparent))}
+.content{min-width:0;padding-bottom:40px}
+
+/* Cabecera */
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:36px;align-items:end;padding-block:64px 56px}
+.hero > *{min-width:0}
+.hero-main{container-type:inline-size}
+h1{font-weight:900;font-stretch:122%;text-transform:uppercase;font-size:clamp(40px,8.4vw,104px);font-size:min(104px,16.5cqi);line-height:.88;letter-spacing:-.02em}
+h1 span{display:block}
+h1 .acc{color:var(--ink)}
+h1::after{content:"";display:block;width:96px;height:10px;background:var(--accent);margin-top:22px;border:2px solid var(--edge)}
+.lead{font-size:20px;line-height:1.5;margin-top:26px;max-width:36ch}
+.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-block;font:700 16px var(--font);text-decoration:none;padding:12px 20px;border:3px solid var(--edge);background:var(--paper);color:var(--ink);box-shadow:5px 5px 0 var(--edge);transition:transform .12s,box-shadow .12s}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--edge)}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}}
+
+.ficha{background:var(--plate);color:var(--plate-ink);padding:22px 22px 18px;border:3px solid var(--edge);box-shadow:8px 8px 0 var(--accent)}
+.ficha h2{font:700 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:6px}
+.ficha dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:0 16px}
+.ficha dt{font:500 12px/2.2 var(--mono);text-transform:uppercase;letter-spacing:.06em;opacity:.8;padding-top:6px}
+.ficha dd{margin:0;padding:8px 0;border-bottom:1px dashed color-mix(in srgb,var(--plate-ink) 40%,transparent);font-weight:600}
+.ficha dd:last-of-type{border-bottom:0}
+
+/* Secciones */
+section{padding-block:56px}
+.label{display:inline-block;background:var(--plate);color:var(--plate-ink);font-weight:800;font-stretch:120%;text-transform:uppercase;font-size:clamp(22px,3.2vw,30px);letter-spacing:.01em;padding:6px 14px 4px;margin-left:calc(-28px - var(--rail) / 2 - 4px);position:relative}
+.label::before{content:"";position:absolute;left:-1px;top:50%;width:0;height:0}
+.section-lead{color:var(--muted);margin-top:14px;max-width:60ch}
+
+/* Proyectos */
+.projects{display:grid;gap:36px;margin-top:32px}
+.proj{background:var(--paper);border:3px solid var(--edge);box-shadow:8px 8px 0 var(--edge);display:grid;grid-template-columns:1.2fr 1fr}
+.proj > *{min-width:0}
+.proj-text{padding:26px 28px}
+.proj-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.proj h3{font-weight:800;font-stretch:112%;font-size:clamp(24px,3vw,30px);line-height:1.1}
+.status{font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.06em;border:2px solid var(--edge);padding:2px 8px}
+.status.live{background:var(--accent);border-color:var(--edge);color:var(--accent-ink)}
+.proj p{margin-top:12px;max-width:58ch}
+.proj ul.tests{margin:12px 0 0;padding-left:20px;display:grid;gap:6px}
+.proj ul.tests b{font-weight:700}
+.tech{margin-top:16px;display:flex;flex-wrap:wrap;gap:6px 14px;font:500 13px var(--mono);color:var(--muted)}
+.tech span::before{content:"/ ";color:var(--accent-text)}
+.links{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px 22px;font-weight:700}
+.links a{text-decoration:none;border-bottom:3px solid var(--accent);padding-bottom:1px}
+.links a:hover{background:var(--accent);color:var(--accent-ink)}
+.private{font:500 13px var(--mono);color:var(--muted)}
+.proj-visual{border-left:3px solid var(--edge);background:var(--bg);display:grid;place-items:center;padding:26px 20px}
+
+.vis-cap{font:500 11px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:12px;text-align:center}
+
+.proj-visual.photo{margin:0;padding:0;position:relative;display:block;min-height:280px;overflow:hidden}
+.proj-visual.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:12% 92%}
+.proj-visual.photo figcaption{position:absolute;left:12px;bottom:12px;background:var(--plate);color:var(--plate-ink);font:500 12px var(--mono);padding:5px 9px;text-transform:uppercase;letter-spacing:.05em}
+@media (max-width:860px){.proj-visual.photo{min-height:0;aspect-ratio:4/3}}
+/* Caja y comandero del TPV */
+.devices{display:flex;align-items:flex-end;gap:14px;justify-content:center;min-height:200px}
+.dev{background:var(--paper);border:3px solid var(--edge);display:flex;flex-direction:column;overflow:hidden;box-shadow:5px 5px 0 var(--edge)}
+.dev.phone{width:92px;height:184px;border-radius:16px;padding:16px 8px 10px;gap:6px}
+.dev.desk{height:156px;border-radius:4px;padding:0}
+.dev.desk .bar{height:18px;border-bottom:3px solid var(--edge);display:flex;gap:4px;align-items:center;padding:0 6px;background:var(--plate)}
+.dev.desk .bar i{width:5px;height:5px;border-radius:50%;background:var(--plate-ink)}
+.dev.desk .body{display:grid;grid-template-columns:50px 1fr;flex:1}
+.dev.desk .side{border-right:3px solid var(--edge);padding:8px 6px;display:flex;flex-direction:column;gap:5px}
+.dev.desk .main{padding:8px;display:flex;flex-direction:column;gap:6px}
+.blk{background:var(--soft);height:14px;border:2px solid var(--edge)}
+.blk.a{background:var(--accent)} .blk.t{height:6px;border:0;background:var(--ink);opacity:.35} .blk.h{height:34px}
+.grid-mesas{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.grid-mesas b{aspect-ratio:1;background:var(--soft);border:2px solid var(--edge)}
+.grid-mesas b.on{background:var(--accent)}
+.dev-label{font:500 11px var(--mono);color:var(--muted);text-align:center;margin-top:10px;text-transform:uppercase;letter-spacing:.06em}
+
+/* Sensores del robot */
+.ring{width:200px;max-width:100%;height:auto}
+.sensors{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.sensors i{width:16px;height:16px;border-radius:50%;border:3px solid var(--edge)}
+.sensors i.on{background:var(--ink)}
+
+/* Stock de Copa Açaí */
+.stock{width:100%;max-width:260px;display:grid;gap:10px}
+.stock div{display:grid;grid-template-columns:1fr 64px;gap:10px;align-items:center}
+.stock b{height:12px;background:var(--soft);border:2px solid var(--edge);position:relative;overflow:hidden}
+.stock b::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--lvl);background:var(--ink)}
+.stock em{font:500 11px var(--mono);font-style:normal;text-transform:uppercase;text-align:center;padding:2px 0;border:2px solid var(--edge)}
+.stock em.low{background:var(--accent);color:var(--accent-ink);border-color:var(--edge)}
+
+/* Tecnologías */
+.stack{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:28px;border-top:3px solid var(--edge)}
+.stack > div{padding:18px 20px 20px 0;border-bottom:3px solid var(--edge);min-width:0}
+.stack > div:nth-child(odd){border-right:3px solid var(--edge)}
+.stack > div:nth-child(even){padding-left:20px}
+.stack h3{font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px}
+.stack p{font-weight:700;font-stretch:108%;font-size:20px;line-height:1.35}
+
+/* Formación y actividades */
+.rows{list-style:none;margin:28px 0 0;padding:0;border-top:3px solid var(--edge)}
+.rows li{display:grid;grid-template-columns:150px 1fr;gap:16px;padding-block:16px;border-bottom:1px solid var(--edge)}
+.rows li > *{min-width:0}
+.rows time{font:500 14px var(--mono);font-variant-numeric:tabular-nums;padding-top:3px}
+.rows h3{font-size:19px;font-weight:700;line-height:1.3}
+.rows p{color:var(--muted);margin-top:2px}
+.rows a.inline{color:var(--ink);font-weight:700;text-decoration-color:var(--accent);text-decoration-thickness:3px;text-underline-offset:3px;white-space:nowrap}
+.langs{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+.langs div{display:flex;align-items:stretch;border:3px solid var(--edge);box-shadow:5px 5px 0 var(--edge);background:var(--paper)}
+.langs b{padding:8px 14px;font-weight:700}
+.langs span{padding:8px 12px;background:var(--plate);color:var(--plate-ink);font:500 15px var(--mono)}
+.sub-label{font-weight:800;font-stretch:115%;text-transform:uppercase;font-size:18px;margin-top:44px}
+
+/* Contacto */
+.contact{background:var(--plate);color:var(--plate-ink);border:3px solid var(--edge);box-shadow:10px 10px 0 var(--accent);margin-top:28px;display:grid;grid-template-columns:1fr 1.15fr}
+.contact > *{min-width:0}
+.c-info{padding:30px 28px}
+.c-info{container-type:inline-size}
+.c-info h3{font-weight:900;font-stretch:120%;text-transform:uppercase;font-size:clamp(30px,4.4vw,46px);font-size:min(46px,10cqi);line-height:.95}
+.c-info p{margin-top:16px;max-width:40ch}
+.mail{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.mail code{font:500 17px var(--mono);user-select:all;overflow-wrap:anywhere}
+.copy{font:700 14px var(--font);background:transparent;color:var(--plate-ink);border:2px solid var(--plate-ink);padding:6px 12px;cursor:pointer}
+.copy:hover{background:var(--plate-ink);color:var(--plate)}
+.socials{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:18px;font-weight:700}
+.socials a{text-underline-offset:4px;text-decoration-color:var(--accent);text-decoration-thickness:2px}
+.cform{background:var(--paper);color:var(--ink);padding:28px;display:grid;gap:16px;border-left:3px solid var(--edge)}
+.field{display:grid;gap:5px}
+.field label{font-weight:700;font-size:15px}
+.opt{font-weight:400;color:var(--muted)}
+.field input,.field textarea{width:100%;font:400 16px var(--font);color:var(--ink);background:var(--bg);border:3px solid var(--edge);border-radius:0;padding:10px 12px;resize:vertical}
+.field input:focus,.field textarea:focus{outline:none;box-shadow:4px 4px 0 var(--accent)}
+.field.bad input,.field.bad textarea{border-color:var(--warn)}
+.err{color:var(--warn);font-size:14px}
+.meta{display:flex;justify-content:space-between;gap:12px}
+.count{margin-left:auto;font:400 12px var(--mono);color:var(--muted)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.send{justify-self:start;font:800 16px var(--font);background:var(--accent);color:var(--accent-ink);border:3px solid var(--edge);padding:12px 24px;box-shadow:5px 5px 0 var(--edge);cursor:pointer}
+.send:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--edge)}
+.send[disabled]{opacity:.6;cursor:wait}
+.status-msg{font-size:15px;padding:10px 12px;border:2px solid var(--ok)}
+.status-msg.ko{border-color:var(--warn)}
+
+footer{border-top:3px solid var(--edge);margin-top:24px;padding-block:22px 36px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:400 13px var(--mono);color:var(--muted)}
+
+@media (max-width:860px){
+  .hero,.proj,.contact{grid-template-columns:1fr}
+  .proj-visual{border-left:0;border-top:3px solid var(--edge)}
+  .cform{border-left:0;border-top:3px solid var(--edge)}
+}
+@media (max-width:600px){
+  :root{--rail:32px}
+  .track{gap:0 16px}
+  .rail::before{width:5px}
+  .bot{width:32px;height:47px;top:calc(50vh - 23px)}
+  .label{margin-left:calc(-16px - var(--rail) / 2 - 3px)}
+  h1{font-stretch:108%}
+  .hero{padding-block:40px}
+  .proj-text,.c-info,.cform{padding:22px 18px}
+  .proj{box-shadow:5px 5px 0 var(--edge)}
+  .stack{grid-template-columns:1fr}
+  .stack > div:nth-child(odd){border-right:0}
+  .stack > div:nth-child(even){padding-left:0}
+  .rows li{grid-template-columns:1fr;gap:2px}
+  .bar nav{gap:4px 14px;font-size:14px}
+  .brand{display:none}
+  .contact{box-shadow:6px 6px 0 var(--accent)}
+}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="#inicio">A. NASRI ESCARTI</a>
+    <nav aria-label="Secciones">
+      <a href="#proyectos">Proyectos</a>
+      <a href="#tecnologias">Tecnologías</a>
+      <a href="#formacion">Formación</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+<div class="stripe" aria-hidden="true"></div>
+
+<div class="wrap">
+  <div class="track">
+    <div class="rail" aria-hidden="true"><div class="bot"><svg viewBox="0 0 48 70"><rect x="9" y="3" width="30" height="52" rx="3" fill="#141416" stroke="var(--ink)" stroke-width="2"/><rect x="0" y="5" width="9" height="17" rx="2.5" fill="#202024" stroke="var(--ink)" stroke-width="1.5"/><line x1="7.5" y1="7" x2="1.5" y2="10" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="7.5" y1="11" x2="1.5" y2="14" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="7.5" y1="15" x2="1.5" y2="18" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="7.5" y1="19" x2="1.5" y2="22" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><rect x="39" y="5" width="9" height="17" rx="2.5" fill="#202024" stroke="var(--ink)" stroke-width="1.5"/><line x1="40.5" y1="7" x2="46.5" y2="10" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="40.5" y1="11" x2="46.5" y2="14" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="40.5" y1="15" x2="46.5" y2="18" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="40.5" y1="19" x2="46.5" y2="22" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><rect x="0" y="36" width="9" height="17" rx="2.5" fill="#202024" stroke="var(--ink)" stroke-width="1.5"/><line x1="1.5" y1="38" x2="7.5" y2="41" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="1.5" y1="42" x2="7.5" y2="45" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="1.5" y1="46" x2="7.5" y2="49" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="1.5" y1="50" x2="7.5" y2="53" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><rect x="39" y="36" width="9" height="17" rx="2.5" fill="#202024" stroke="var(--ink)" stroke-width="1.5"/><line x1="46.5" y1="38" x2="40.5" y2="41" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="46.5" y1="42" x2="40.5" y2="45" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="46.5" y1="46" x2="40.5" y2="49" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="46.5" y1="50" x2="40.5" y2="53" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><rect x="13" y="9" width="22" height="25" rx="1.5" fill="#1F5FA8" stroke="#0B0B0D" stroke-width="1"/><rect x="21" y="17" width="7" height="8" fill="#0B0B0D"/><path d="M15 14 C 20 4, 26 30, 33 12" fill="none" stroke="#E5484D" stroke-width="1.4"/><path d="M15 30 C 22 20, 26 36, 33 26" fill="none" stroke="#F2B705" stroke-width="1.4"/><path d="M17 12 C 24 26, 28 8, 31 31" fill="none" stroke="#3FB950" stroke-width="1.2"/><path d="M14 22 C 20 30, 30 14, 34 20" fill="none" stroke="#58A6FF" stroke-width="1.2"/><rect x="13" y="38" width="22" height="11" rx="1.5" fill="#1F5FA8" stroke="#0B0B0D" stroke-width="1"/><circle cx="18.5" cy="43.5" r="4" fill="#F1F1F1" stroke="#0B0B0D" stroke-width="1.2"/><circle cx="29.5" cy="43.5" r="4" fill="#F1F1F1" stroke="#0B0B0D" stroke-width="1.2"/><rect x="11" y="57" width="26" height="6" rx="1" fill="#141416" stroke="var(--ink)" stroke-width="1.2"/><circle cx="15" cy="60" r="1.6" fill="#3FE06A"/><rect x="19.5" y="59" width="2" height="2" fill="#5A5E68"/><rect x="22.9" y="59" width="2" height="2" fill="#5A5E68"/><rect x="26.3" y="59" width="2" height="2" fill="#5A5E68"/><rect x="29.7" y="59" width="2" height="2" fill="#5A5E68"/><rect x="33.1" y="59" width="2" height="2" fill="#5A5E68"/></svg></div></div>
+    <main class="content">
+
+      <section class="hero" id="inicio">
+        <div class="hero-main">
+          <h1><span>Adrián</span><span class="acc">Nasri</span><span class="acc">Escarti</span></h1>
+          <p class="lead">Estudiante de DAM. Lo que más me gusta es el backend, pero también hago apps de escritorio y Android, y he programado un robot para competir.</p>
+          <div class="cta">
+            <a class="btn primary" href="#proyectos">Ver proyectos</a>
+            <a class="btn" href="#contacto">Escríbeme</a>
+          </div>
+        </div>
+        <aside class="ficha" aria-label="Resumen">
+          <h2>Ficha</h2>
+          <dl>
+            <dt>Estudio</dt><dd>DAM · desde 2025</dd>
+            <dt>Me interesa</dt><dd>Backend: Java, Python, C++, Node.js</dd>
+            <dt>Ahora</dt><dd>Proyecto final: un TPV para restaurantes</dd>
+            <dt>Último reto</dt><dd>Final del ASTI Robotics Challenge 2026</dd>
+            <dt>Busco</dt><dd>Prácticas como desarrollador</dd>
+          </dl>
+        </aside>
+      </section>
+
+      <section id="proyectos">
+        <h2 class="label">Proyectos</h2>
+        <div class="projects">
+
+          <article class="proj">
+            <div class="proj-text">
+              <div class="proj-head"><h3>TPV Restaurante</h3><span class="status live">En desarrollo</span></div>
+              <p>Mi proyecto final del ciclo. Un punto de venta con un servidor central y una sola app con dos modos: <b>caja</b> en el PC o la tablet, y <b>comandero</b> en el móvil de los camareros.</p>
+              <p>El servidor expone una API REST y guarda mesas, comandas, cobros y turnos de caja en PostgreSQL. El dinero se guarda en céntimos para no arrastrar errores de redondeo. Las pruebas levantan una base de datos real con Testcontainers y se ejecutan en GitHub Actions.</p>
+              <div class="tech"><span>Kotlin</span><span>Compose Multiplatform</span><span>Node.js</span><span>TypeScript</span><span>Express</span><span>Prisma</span><span>PostgreSQL</span><span>Docker</span></div>
+              <div class="links"><span class="private">Repositorio privado mientras lo termino</span></div>
+            </div>
+            <div class="proj-visual">
+              <div style="width:100%">
+                <div class="devices" aria-hidden="true">
+                  <div style="flex:1;max-width:250px"><div class="dev desk"><div class="bar"><i></i><i></i><i></i></div><div class="body"><div class="side"><div class="blk a"></div><div class="blk t"></div><div class="blk t"></div><div class="blk t"></div></div><div class="main"><div class="grid-mesas"><b></b><b class="on"></b><b></b><b class="on"></b><b></b><b></b></div><div class="blk t"></div><div class="blk a"></div></div></div></div><div class="dev-label">Caja</div></div>
+                  <div><div class="dev phone"><div class="blk a"></div><div class="blk t"></div><div class="blk"></div><div class="blk"></div><div class="blk"></div><div class="blk t"></div></div><div class="dev-label">Comandero</div></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="proj">
+            <div class="proj-text">
+              <div class="proj-head"><h3>Robot ASTI Robotics Challenge</h3><span class="status">Final 2026 · Burgos</span></div>
+              <p>Programé un robot Osoyoo M2 con ruedas mecanum, con un programa para cada prueba:</p>
+              <ul class="tests">
+                <li><b>Mini sumo.</b> Echar al rival del ring sin salirse. Cinco sensores de línea vigilan el borde y el ultrasonidos busca al rival. Hay una segunda versión con el sensor sobre un servo que barre como un radar.</li>
+                <li><b>Siguelíneas.</b> Sigue una línea negra con curvas suaves y, si la pierde, gira hacia el último lado donde la vio.</li>
+                <li><b>Figuras.</b> Traza un cuadrado, un rectángulo y un triángulo midiendo distancias y giros por tiempo, porque el robot no tiene encoders.</li>
+              </ul>
+              <div class="tech"><span>C++</span><span>Arduino Mega</span><span>Sensores IR</span><span>Ultrasonidos</span><span>Servo</span></div>
+              <div class="links"><a href="robot.html">Cómo resolví cada prueba →</a><a href="https://github.com/adrian1glitch/robot" target="_blank" rel="noopener">Código en GitHub ↗</a><a href="https://open.spotify.com/episode/4vZnDFgYJV0GDE8bqFVGir" target="_blank" rel="noopener">Escucha el podcast ↗</a></div>
+            </div>
+            <figure class="proj-visual photo">
+              <img src="media/robot-cerca.jpg" alt="El robot Osoyoo M2 sobre la pista del siguelíneas, con la barra de sensores de línea encendida" width="1100" height="1147" loading="lazy">
+              <figcaption>En la pista del siguelíneas</figcaption>
+            </figure>
+          </article>
+
+          <article class="proj">
+            <div class="proj-text">
+              <div class="proj-head"><h3>Copa Açaí</h3><span class="status">En equipo</span></div>
+              <p>Hecho durante el Málaga Business Bootcamp, cinco días con participantes de Países Bajos. Analizamos las necesidades de un negocio real y diseñamos una web para controlar su stock.</p>
+              <p>El personal inicia sesión, da de alta productos y mantiene una lista de reposición que se actualiza al momento en todos los dispositivos.</p>
+              <div class="tech"><span>Vue 3</span><span>Vue Router</span><span>Firebase Auth</span><span>Firestore</span><span>Vite</span></div>
+              <div class="links"><a href="https://github.com/Scripty2k/Copa_Acai" target="_blank" rel="noopener">Código en GitHub ↗</a></div>
+            </div>
+            <div class="proj-visual">
+              <div aria-hidden="true" style="width:100%;display:grid;justify-items:center">
+                <div class="stock">
+                  <div><b style="--lvl:82%"></b><em>OK</em></div>
+                  <div><b style="--lvl:18%"></b><em class="low">Reponer</em></div>
+                  <div><b style="--lvl:64%"></b><em>OK</em></div>
+                  <div><b style="--lvl:9%"></b><em class="low">Reponer</em></div>
+                  <div><b style="--lvl:47%"></b><em>OK</em></div>
+                </div>
+                <p class="vis-cap">Lista de reposición</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section id="tecnologias">
+        <h2 class="label">Tecnologías</h2>
+        <div class="stack">
+          <div><h3>Lenguajes</h3><p>Java, Python, C++, Kotlin, TypeScript, SQL</p></div>
+          <div><h3>Backend</h3><p>Node.js, Express, Spring Boot, APIs REST, PostgreSQL, Prisma</p></div>
+          <div><h3>Apps y web</h3><p>Compose Multiplatform, Android Studio, Vue, HTML, CSS, JavaScript</p></div>
+          <div><h3>Herramientas</h3><p>Git, GitHub Actions, Docker, JUnit, Vitest, IntelliJ IDEA</p></div>
+        </div>
+      </section>
+
+      <section id="formacion">
+        <h2 class="label">Formación</h2>
+        <ol class="rows">
+          <li><time>2025 – hoy</time><div><h3>CFGS Desarrollo de Aplicaciones Multiplataforma</h3><p>Digitech FP · En curso. Programación, bases de datos, acceso a datos, interfaces, servicios y procesos, y desarrollo móvil.</p></div></li>
+          <li><time>2022 – 2025</time><div><h3>Grado en Ingeniería en Tecnologías Industriales</h3><p>Sin finalizar.</p></div></li>
+          <li><time>2020 – 2022</time><div><h3>Grado en Ingeniería Eléctrica</h3><p>Sin finalizar.</p></div></li>
+          <li><time>2018 – 2020</time><div><h3>Bachillerato de Ciencias</h3></div></li>
+        </ol>
+
+        <h3 class="sub-label">Actividades</h3>
+        <ol class="rows">
+          <li><time>2026</time><div><h3>ASTI Robotics Challenge</h3><p>Participé en la competición y en la final de Burgos.</p></div></li>
+          <li><time>Mayo 2026</time><div><h3>Podcast Código Abierto · Digitech FP</h3><p>Participé en el episodio «Rumbo a la final: robótica y tecnología en ASTI Robotics Challenge», sobre cómo preparamos la final. <a class="inline" href="https://open.spotify.com/episode/4vZnDFgYJV0GDE8bqFVGir" target="_blank" rel="noopener">Escuchar en Spotify ↗</a></p></div></li>
+          <li><time>Certificado</time><div><h3>Málaga Business Bootcamp</h3><p>Cinco días analizando las necesidades de un negocio real y diseñando una solución: un sistema de gestión de stock.</p></div></li>
+        </ol>
+
+        <h3 class="sub-label">Idiomas</h3>
+        <div class="langs">
+          <div><b>Inglés</b><span>C1</span></div>
+          <div><b>Árabe darija</b><span>B2 oral · lectoescritura en formación</span></div>
+        </div>
+      </section>
+
+      <section id="contacto">
+        <h2 class="label">Contacto</h2>
+        <div class="contact">
+          <div class="c-info">
+            <h3>¿Hablamos?</h3>
+            <p>Si tienes unas prácticas, una oferta o un proyecto en el que pueda encajar, escríbeme y te contesto al correo que me dejes.</p>
+            <div class="mail"><code id="email">nasriadrian1@gmail.com</code><button class="copy" id="copy" type="button">Copiar email</button></div>
+            <div class="socials"><a href="https://github.com/adrian1glitch" target="_blank" rel="noopener">github.com/adrian1glitch ↗</a><a href="https://www.linkedin.com/in/adrian-nasri-escarti/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+          </div>
+
+          <form class="cform" id="cform" novalidate>
+            <div class="field">
+              <label for="c-nombre">Nombre</label>
+              <input id="c-nombre" name="name" type="text" autocomplete="name" required maxlength="80">
+              <small class="err" id="e-nombre" hidden>Escribe tu nombre.</small>
+            </div>
+            <div class="field">
+              <label for="c-email">Email</label>
+              <input id="c-email" name="email" type="email" autocomplete="email" required maxlength="120">
+              <small class="err" id="e-email" hidden>Revisa el email: lo necesito para responderte.</small>
+            </div>
+            <div class="field">
+              <label for="c-empresa">Empresa <span class="opt">(opcional)</span></label>
+              <input id="c-empresa" name="empresa" type="text" autocomplete="organization" maxlength="80">
+            </div>
+            <div class="field">
+              <label for="c-mensaje">Mensaje</label>
+              <textarea id="c-mensaje" name="message" rows="5" required maxlength="2000"></textarea>
+              <div class="meta"><small class="err" id="e-mensaje" hidden>El mensaje es demasiado corto.</small><small class="count" id="c-count">0 / 2000</small></div>
+            </div>
+            <input type="checkbox" name="botcheck" id="c-bot" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button class="send" id="c-send" type="submit">Enviar mensaje</button>
+            <div class="status-msg" id="c-status" role="status" aria-live="polite" hidden></div>
+          </form>
+        </div>
+      </section>
+
+      <footer><span>© 2026 Adrián Nasri Escarti</span><a href="#inicio">Volver arriba ↑</a></footer>
+    </main>
+  </div>
+</div>
+
+<script>
+document.getElementById('copy').addEventListener('click', function(){
+  var btn=this, text=document.getElementById('email').textContent;
+  function done(){btn.textContent='Copiado';setTimeout(function(){btn.textContent='Copiar email'},1800)}
+  function fallback(){var r=document.createRange();r.selectNodeContents(document.getElementById('email'));var s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selecciónalo y cópialo'}
+  try{navigator.clipboard.writeText(text).then(done,fallback)}catch(e){fallback()}
+});
+
+/* Formulario de contacto: Web3Forms reenvía cada mensaje a mi correo.
+   Clave pública de Web3Forms (se obtiene gratis en web3forms.com con mi email). */
+var WEB3FORMS_KEY = "";
+
+(function(){
+  var f=document.getElementById('cform'), send=document.getElementById('c-send'), st=document.getElementById('c-status');
+  var nombre=document.getElementById('c-nombre'), email=document.getElementById('c-email'), msg=document.getElementById('c-mensaje'), count=document.getElementById('c-count');
+  msg.addEventListener('input',function(){count.textContent=msg.value.length+' / 2000'});
+  function check(input,errId,ok){var e=document.getElementById(errId);input.parentNode.classList.toggle('bad',!ok);e.hidden=ok;return ok}
+  [nombre,email,msg].forEach(function(i){i.addEventListener('input',function(){if(i.parentNode.classList.contains('bad'))validate(i)})});
+  function validate(only){
+    var r=true;
+    if(!only||only===nombre) r=check(nombre,'e-nombre',nombre.value.trim().length>1)&&r;
+    if(!only||only===email) r=check(email,'e-email',/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim()))&&r;
+    if(!only||only===msg) r=check(msg.parentNode.querySelector('textarea'),'e-mensaje',msg.value.trim().length>=10)&&r;
+    return r;
+  }
+  function show(kind,text){st.hidden=false;st.className='status-msg '+kind;st.textContent=text}
+  function fail(){show('ko','No se ha podido enviar el mensaje. Escríbeme directamente a nasriadrian1@gmail.com y te respondo.')}
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault(); st.hidden=true;
+    if(!validate()){var b=f.querySelector('.bad input, .bad textarea'); if(b) b.focus(); return}
+    if(document.getElementById('c-bot').checked) return;
+    if(!WEB3FORMS_KEY){fail();return}
+    var empresa=document.getElementById('c-empresa').value.trim();
+    send.disabled=true; send.textContent='Enviando…';
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({access_key:WEB3FORMS_KEY,subject:'Portfolio · Mensaje de '+nombre.value.trim(),from_name:'Portfolio Adrián Nasri Escarti',
+        name:nombre.value.trim(),email:email.value.trim(),empresa:empresa||'—',message:msg.value.trim(),botcheck:false})})
+    .then(function(r){return r.json()})
+    .then(function(d){if(d&&d.success){f.reset();count.textContent='0 / 2000';show('ok','Mensaje enviado. Te responderé al email que has dejado.')}else fail()})
+    .catch(fail)
+    .finally(function(){send.disabled=false;send.textContent='Enviar mensaje'});
+  });
+})();
+</script>
+</body>
+</html>
