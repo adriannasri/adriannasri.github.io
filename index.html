@@ -1,6 +1,7 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
+<meta name="color-scheme" content="light only">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>
@@ -57,7 +58,7 @@ a{color:inherit}
 
 /* Pista */
 .wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.track{display:grid;grid-template-columns:var(--rail) 1fr;gap:0 28px}
+.track{display:grid;grid-template-columns:var(--rail) 1fr;gap:0 52px}
 .rail{position:relative}
 .rail::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:7px;transform:translateX(-50%);background:var(--ink)}
 .bot{position:sticky;top:calc(50vh - 35px);margin:40px auto 0;width:48px;height:70px;z-index:1;display:block}
@@ -211,7 +212,7 @@ footer{border-top:3px solid var(--edge);margin-top:24px;padding-block:22px 36px;
 }
 @media (max-width:600px){
   :root{--rail:32px}
-  .track{gap:0 16px}
+  .track{gap:0 26px}
   .rail::before{width:5px}
   .bot{width:32px;height:47px;top:calc(50vh - 23px)}
   .label{margin-left:calc(-16px - var(--rail) / 2 - 3px)}
