@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="es" data-theme="dark">
 <head>
-<meta name="color-scheme" content="dark only">
+<meta name="color-scheme" content="dark light">
+<script>/* Tema: oscuro por defecto; se recuerda la elección del visitante. */(function(){var t="dark";try{t=localStorage.getItem("tema")||"dark"}catch(e){}document.documentElement.setAttribute("data-theme",t)})();</script>
 <meta charset="utf-8">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%2314213D%22/%3E%3Crect x=%229%22 y=%225%22 width=%2214%22 height=%2222%22 rx=%222%22 fill=%22%23F2B705%22/%3E%3Crect x=%224%22 y=%227%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3Crect x=%2224%22 y=%227%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3Crect x=%224%22 y=%2218%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3Crect x=%2224%22 y=%2218%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3C/svg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -225,6 +226,9 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
   .rail::before{width:5px}
   .bot{width:32px;height:47px;top:calc(50vh - 23px)}
 }
+.theme-btn{font:inherit;font-size:14px;font-weight:600;line-height:1;color:inherit;background:transparent;border:2px solid currentColor;padding:6px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.theme-btn:hover{background:var(--accent);color:var(--accent-ink,#14213D);border-color:var(--accent)}
+.theme-btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 </style>
 </head>
 <body>
@@ -233,6 +237,7 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
   <nav class="top">
     <a class="back" href="index.html">← Portfolio de Adrián</a>
     <a class="repo" href="https://github.com/adriannasri/robot" target="_blank" rel="noopener">Repositorio completo en GitHub ↗</a>
+    <button class="theme-btn" type="button" id="theme-btn" aria-label="Cambiar a modo claro"><span aria-hidden="true">☀</span><span class="tl">Claro</span></button>
   </nav>
 
   <div class="track">
@@ -482,6 +487,17 @@ try{if(matchMedia('(prefers-reduced-motion: reduce)').matches){var v=document.ge
     var mv=Math.min(Math.abs(d)*0.12, 1.2); off=(off+(d>0?1:-1)*mv)%STEP; if(off<0) off+=STEP;
     groups.forEach(function(g){g.setAttribute('transform','translate(0 '+(-off)+')')});}
   window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('theme-btn'); if(!b) return;
+  function paint(){var dark=document.documentElement.getAttribute('data-theme')!=='light';
+    b.querySelector('span').textContent=dark?'☀':'☾'; b.querySelector('.tl').textContent=dark?'Claro':'Oscuro';
+    b.setAttribute('aria-label',dark?'Cambiar a modo claro':'Cambiar a modo oscuro');}
+  b.addEventListener('click',function(){var next=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
+    document.documentElement.setAttribute('data-theme',next); try{localStorage.setItem('tema',next)}catch(e){} paint();});
+  paint();
 })();
 </script>
 </body>

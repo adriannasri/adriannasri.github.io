@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="es" data-theme="dark">
 <head>
-<meta name="color-scheme" content="dark only">
+<meta name="color-scheme" content="dark light">
+<script>/* Tema: oscuro por defecto; se recuerda la elección del visitante. */(function(){var t="dark";try{t=localStorage.getItem("tema")||"dark"}catch(e){}document.documentElement.setAttribute("data-theme",t)})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>
@@ -9,6 +10,9 @@
 body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 img{max-width:100%}
 [hidden]{display:none!important}
+.theme-btn{font:inherit;font-size:14px;font-weight:600;line-height:1;color:inherit;background:transparent;border:2px solid currentColor;padding:6px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.theme-btn:hover{background:var(--accent);color:var(--accent-ink,#14213D);border-color:var(--accent)}
+.theme-btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 </style>
 <meta name="description" content="Portfolio de Adrián Nasri Escarti, estudiante de DAM en Digitech FP: backend, apps multiplataforma y el robot finalista del ASTI Robotics Challenge 2026.">
 <meta property="og:title" content="Adrián Nasri Escarti">
@@ -51,7 +55,7 @@ a{color:inherit}
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .bar-in{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:12px}
 .brand{font-weight:800;font-stretch:118%;text-decoration:none;letter-spacing:.01em}
-.bar nav{display:flex;gap:4px 20px;flex-wrap:wrap;font-weight:600;font-size:15px}
+.bar nav{display:flex;gap:4px 20px;flex-wrap:wrap;align-items:center;font-weight:600;font-size:15px}
 .bar nav a{text-decoration:none}
 .bar nav a:hover{text-decoration:underline;text-underline-offset:4px}
 .stripe{height:8px;background:repeating-linear-gradient(-45deg,var(--plate) 0 12px,var(--accent) 12px 24px)}
@@ -239,6 +243,7 @@ footer{border-top:3px solid var(--edge);margin-top:24px;padding-block:22px 36px;
       <a href="#tecnologias">Tecnologías</a>
       <a href="#formacion">Formación</a>
       <a href="#contacto">Contacto</a>
+      <button class="theme-btn" type="button" id="theme-btn" aria-label="Cambiar a modo claro"><span aria-hidden="true">☀</span><span class="tl">Claro</span></button>
     </nav>
   </div>
 </header>
@@ -487,6 +492,17 @@ var WEB3FORMS_KEY = "abcbb10e-8af5-4bf7-8fe7-def2d9bdbc04";
     var mv=Math.min(Math.abs(d)*0.12, 1.2); off=(off+(d>0?1:-1)*mv)%STEP; if(off<0) off+=STEP;
     groups.forEach(function(g){g.setAttribute('transform','translate(0 '+(-off)+')')});}
   window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('theme-btn'); if(!b) return;
+  function paint(){var dark=document.documentElement.getAttribute('data-theme')!=='light';
+    b.querySelector('span').textContent=dark?'☀':'☾'; b.querySelector('.tl').textContent=dark?'Claro':'Oscuro';
+    b.setAttribute('aria-label',dark?'Cambiar a modo claro':'Cambiar a modo oscuro');}
+  b.addEventListener('click',function(){var next=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
+    document.documentElement.setAttribute('data-theme',next); try{localStorage.setItem('tema',next)}catch(e){} paint();});
+  paint();
 })();
 </script>
 </body>
