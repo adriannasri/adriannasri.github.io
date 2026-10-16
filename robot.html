@@ -449,5 +449,33 @@ void avanzar(int centimetros) {
 <script>
 try{if(matchMedia('(prefers-reduced-motion: reduce)').matches){var v=document.getElementById('vid-sigue');v.removeAttribute('autoplay');v.pause()}}catch(e){}
 </script>
+<script>
+/* Ruedas del robot: los rodillos se desplazan al hacer scroll, como si rodara por la pista. */
+(function(){
+  var svg=document.querySelector('.bot svg'); if(!svg) return;
+  var NS='http://www.w3.org/2000/svg', groups=[], STEP=4;
+  [].slice.call(svg.querySelectorAll('rect')).filter(function(r){return r.getAttribute('width')==='9'}).forEach(function(wheel,i){
+    var lines=[], n=wheel.nextElementSibling;
+    while(n && n.tagName.toLowerCase()==='line'){lines.push(n); n=n.nextElementSibling}
+    if(!lines.length) return;
+    var clip=document.createElementNS(NS,'clipPath'); clip.id='rueda-'+i;
+    var cr=wheel.cloneNode(false); cr.removeAttribute('stroke'); cr.removeAttribute('stroke-width'); clip.appendChild(cr);
+    svg.insertBefore(clip, svg.firstChild);
+    var outer=document.createElementNS(NS,'g'); outer.setAttribute('clip-path','url(#rueda-'+i+')');
+    var g=document.createElementNS(NS,'g'); outer.appendChild(g);
+    wheel.parentNode.insertBefore(outer, lines[0]);
+    lines.forEach(function(l){ g.appendChild(l);
+      [-2,-1,1,2,3,4,-3,-4].forEach(function(k){var c=l.cloneNode(false);
+        c.setAttribute('y1',+l.getAttribute('y1')+k*STEP); c.setAttribute('y2',+l.getAttribute('y2')+k*STEP); g.appendChild(c);});
+    });
+    groups.push(g);
+  });
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var ticking=false;
+  function update(){ticking=false; var off=(window.scrollY*0.12)%STEP;
+    groups.forEach(function(g){g.setAttribute('transform','translate(0 '+(-off)+')')});}
+  window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
+})();
+</script>
 </body>
 </html>
