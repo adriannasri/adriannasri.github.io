@@ -469,15 +469,22 @@ var WEB3FORMS_KEY = "abcbb10e-8af5-4bf7-8fe7-def2d9bdbc04";
     var outer=document.createElementNS(NS,'g'); outer.setAttribute('clip-path','url(#rueda-'+i+')');
     var g=document.createElementNS(NS,'g'); outer.appendChild(g);
     wheel.parentNode.insertBefore(outer, lines[0]);
-    lines.forEach(function(l){ g.appendChild(l);
+    lines.forEach(function(l){
+      /* Misma inclinación en las cuatro ruedas para que todas parezcan girar en el mismo sentido. */
+      var x1=+l.getAttribute('x1'),y1=+l.getAttribute('y1'),x2=+l.getAttribute('x2'),y2=+l.getAttribute('y2');
+      if((x1-x2)*(y1-y2)>0){l.setAttribute('x1',x2);l.setAttribute('x2',x1);}
+      g.appendChild(l);
       [-2,-1,1,2,3,4,-3,-4].forEach(function(k){var c=l.cloneNode(false);
         c.setAttribute('y1',+l.getAttribute('y1')+k*STEP); c.setAttribute('y2',+l.getAttribute('y2')+k*STEP); g.appendChild(c);});
     });
     groups.push(g);
   });
   if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var ticking=false;
-  function update(){ticking=false; var off=(window.scrollY*0.12)%STEP;
+  /* Se avanza según el sentido del scroll, con un tope por fotograma para que
+     un scroll rápido no haga parecer que las ruedas giran al revés. */
+  var off=0, lastY=window.scrollY, ticking=false;
+  function update(){ticking=false; var y=window.scrollY, d=y-lastY; lastY=y; if(!d) return;
+    var mv=Math.min(Math.abs(d)*0.12, 1.2); off=(off+(d>0?1:-1)*mv)%STEP; if(off<0) off+=STEP;
     groups.forEach(function(g){g.setAttribute('transform','translate(0 '+(-off)+')')});}
   window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
 })();
