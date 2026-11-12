@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta name="color-scheme" content="dark light">
+<script>/* Theme: dark by default; the visitor's choice is remembered. */(function(){var t="dark";try{t=localStorage.getItem("tema")||"dark"}catch(e){}document.documentElement.setAttribute("data-theme",t)})();</script>
+<meta charset="utf-8">
+<link rel="alternate" hreflang="es" href="https://adriannasri.github.io/">
+<link rel="alternate" hreflang="en" href="https://adriannasri.github.io/en/">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+img{max-width:100%}
+[hidden]{display:none!important}
+.lang-btn{font:inherit;font-size:14px;font-weight:700;line-height:1;color:inherit;text-decoration:none;border:2px solid currentColor;padding:6px 10px;display:inline-flex;align-items:center;letter-spacing:.04em}
+.lang-btn:hover{background:var(--accent);color:var(--accent-ink,#14213D);border-color:var(--accent)}
+.lang-btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.theme-btn{font:inherit;font-size:14px;font-weight:600;line-height:1;color:inherit;background:transparent;border:2px solid currentColor;padding:6px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.theme-btn:hover{background:var(--accent);color:var(--accent-ink,#14213D);border-color:var(--accent)}
+.theme-btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+</style>
+<meta name="description" content="Portfolio of Adrián Nasri Escarti, a Multiplatform App Development student at Digitech FP: backend, cross-platform apps and a robot that reached the ASTI Robotics Challenge 2026 final.">
+<meta property="og:title" content="Adrián Nasri Escarti">
+<meta property="og:description" content="Portfolio of Adrián Nasri Escarti, a Multiplatform App Development student at Digitech FP: backend, cross-platform apps and a robot that reached the ASTI Robotics Challenge 2026 final.">
+<meta property="og:image" content="https://adriannasri.github.io/media/robot-pista.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%2314213D%22/%3E%3Crect x=%229%22 y=%225%22 width=%2214%22 height=%2222%22 rx=%222%22 fill=%22%23F2B705%22/%3E%3Crect x=%224%22 y=%227%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3Crect x=%2224%22 y=%227%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3Crect x=%224%22 y=%2218%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3Crect x=%2224%22 y=%2218%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3C/svg%3E">
+<title>Adrián Nasri Escarti</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una pista de siguelíneas recorre la página (línea negra a la izquierda) y un pequeño robot la sigue al hacer scroll.
+   Bloques con borde negro y sombra dura, amarillo + negro + azul cobalto, como la señalética de una competición. */
+:root{
+  --bg:#F7F6F2; --paper:#FFFFFF; --ink:#14213D; --muted:#586379; --soft:#E7E4DA; --edge:#14213D;
+  --plate:#14213D; --plate-ink:#F7F6F2; --accent:#F2B705; --accent-ink:#14213D; --accent-text:#8A6400; --ok:#2F7A3D; --warn:#B4431A;
+  --font:"Archivo","Arial Narrow",Arial,sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,monospace;
+  --rail:44px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1424; --paper:#161E33; --ink:#ECEFF5; --muted:#A2ACC0; --soft:#24304A; --edge:#3B4A6E;
+  --plate:#1C2742; --plate-ink:#ECEFF5; --accent:#F5C02E; --accent-ink:#14213D; --accent-text:#F5C02E; --ok:#7FD08F; --warn:#F0A060; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1424; --paper:#161E33; --ink:#ECEFF5; --muted:#A2ACC0; --soft:#24304A; --edge:#3B4A6E;
+  --plate:#1C2742; --plate-ink:#ECEFF5; --accent:#F5C02E; --accent-ink:#14213D; --accent-text:#F5C02E; --ok:#7FD08F; --warn:#F0A060; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--font)}
+p{margin:0}
+h1,h2,h3{margin:0;text-wrap:balance}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.02em}
+
+/* Barra superior */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--plate);color:var(--plate-ink);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar-in{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:12px}
+.brand{font-weight:800;font-stretch:118%;text-decoration:none;letter-spacing:.01em}
+.bar nav{display:flex;gap:4px 20px;flex-wrap:wrap;align-items:center;font-weight:600;font-size:15px}
+.bar nav a{text-decoration:none}
+.bar nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.stripe{height:8px;background:repeating-linear-gradient(-45deg,var(--plate) 0 12px,var(--accent) 12px 24px)}
+
+/* Pista */
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.track{display:grid;grid-template-columns:var(--rail) 1fr;gap:0 52px}
+.rail{position:relative}
+.rail::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:7px;transform:translateX(-50%);background:var(--ink)}
+.bot{position:sticky;top:calc(50vh - 35px);margin:40px auto 0;width:48px;height:70px;z-index:1;display:block}
+.bot svg{width:100%;height:100%;display:block;overflow:visible}
+.bot svg{filter:drop-shadow(3px 3px 0 color-mix(in srgb,var(--ink) 25%,transparent))}
+.content{min-width:0;padding-bottom:40px}
+
+/* Cabecera */
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:36px;align-items:end;padding-block:64px 56px}
+.hero > *{min-width:0}
+.hero-main{container-type:inline-size}
+h1{font-weight:900;font-stretch:122%;text-transform:uppercase;font-size:clamp(40px,8.4vw,104px);font-size:min(104px,16.5cqi);line-height:.88;letter-spacing:-.02em}
+h1 span{display:block}
+h1 .acc{color:var(--ink)}
+h1::after{content:"";display:block;width:96px;height:10px;background:var(--accent);margin-top:22px;border:2px solid var(--edge)}
+.lead{font-size:20px;line-height:1.5;margin-top:26px;max-width:36ch}
+.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-block;font:700 16px var(--font);text-decoration:none;padding:12px 20px;border:3px solid var(--edge);background:var(--paper);color:var(--ink);box-shadow:5px 5px 0 var(--edge);transition:transform .12s,box-shadow .12s}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--edge)}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}}
+
+.ficha{background:var(--plate);color:var(--plate-ink);padding:22px 22px 18px;border:3px solid var(--edge);box-shadow:8px 8px 0 var(--accent)}
+.ficha h2{font:700 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:6px}
+.ficha dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:0 16px}
+.ficha dt{font:500 12px/2.2 var(--mono);text-transform:uppercase;letter-spacing:.06em;opacity:.8;padding-top:6px}
+.ficha dd{margin:0;padding:8px 0;border-bottom:1px dashed color-mix(in srgb,var(--plate-ink) 40%,transparent);font-weight:600}
+.ficha dd:last-of-type{border-bottom:0}
+
+/* Secciones */
+section{padding-block:56px}
+.label{display:inline-block;background:var(--plate);color:var(--plate-ink);font-weight:800;font-stretch:120%;text-transform:uppercase;font-size:clamp(22px,3.2vw,30px);letter-spacing:.01em;padding:6px 14px 4px;margin-left:calc(-28px - var(--rail) / 2 - 4px);position:relative}
+.label::before{content:"";position:absolute;left:-1px;top:50%;width:0;height:0}
+.section-lead{color:var(--muted);margin-top:14px;max-width:60ch}
+
+/* Proyectos */
+.projects{display:grid;gap:36px;margin-top:32px}
+.proj{background:var(--paper);border:3px solid var(--edge);box-shadow:8px 8px 0 var(--edge);display:grid;grid-template-columns:1.2fr 1fr}
+.proj > *{min-width:0}
+.proj-text{padding:26px 28px}
+.proj-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.proj h3{font-weight:800;font-stretch:112%;font-size:clamp(24px,3vw,30px);line-height:1.1}
+.status{font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.06em;border:2px solid var(--edge);padding:2px 8px}
+.status.live{background:var(--accent);border-color:var(--edge);color:var(--accent-ink)}
+.proj p{margin-top:12px;max-width:58ch}
+.proj ul.tests{margin:12px 0 0;padding-left:20px;display:grid;gap:6px}
+.proj ul.tests b{font-weight:700}
+.tech{margin-top:16px;display:flex;flex-wrap:wrap;gap:6px 14px;font:500 13px var(--mono);color:var(--muted)}
+.tech span::before{content:"/ ";color:var(--accent-text)}
+.links{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px 22px;font-weight:700}
+.links a{text-decoration:none;border-bottom:3px solid var(--accent);padding-bottom:1px}
+.links a:hover{background:var(--accent);color:var(--accent-ink)}
+.private{font:500 13px var(--mono);color:var(--muted)}
+.proj-visual{border-left:3px solid var(--edge);background:var(--bg);display:grid;place-items:center;padding:26px 20px}
+
+.vis-cap{font:500 11px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:12px;text-align:center}
+
+.proj-visual.photo{margin:0;padding:0;position:relative;display:block;min-height:280px;overflow:hidden}
+.proj-visual.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:12% 92%}
+.proj-visual.photo figcaption{position:absolute;left:12px;bottom:12px;background:var(--plate);color:var(--plate-ink);font:500 12px var(--mono);padding:5px 9px;text-transform:uppercase;letter-spacing:.05em}
+@media (max-width:860px){.proj-visual.photo{min-height:0;aspect-ratio:4/3}}
+/* Caja y comandero del TPV */
+.devices{display:flex;align-items:flex-end;gap:14px;justify-content:center;min-height:200px}
+.dev{background:var(--paper);border:3px solid var(--edge);display:flex;flex-direction:column;overflow:hidden;box-shadow:5px 5px 0 var(--edge)}
+.dev.phone{width:92px;height:184px;border-radius:16px;padding:16px 8px 10px;gap:6px}
+.dev.desk{height:156px;border-radius:4px;padding:0}
+.dev.desk .bar{height:18px;border-bottom:3px solid var(--edge);display:flex;gap:4px;align-items:center;padding:0 6px;background:var(--plate)}
+.dev.desk .bar i{width:5px;height:5px;border-radius:50%;background:var(--plate-ink)}
+.dev.desk .body{display:grid;grid-template-columns:50px 1fr;flex:1}
+.dev.desk .side{border-right:3px solid var(--edge);padding:8px 6px;display:flex;flex-direction:column;gap:5px}
+.dev.desk .main{padding:8px;display:flex;flex-direction:column;gap:6px}
+.blk{background:var(--soft);height:14px;border:2px solid var(--edge)}
+.blk.a{background:var(--accent)} .blk.t{height:6px;border:0;background:var(--ink);opacity:.35} .blk.h{height:34px}
+.grid-mesas{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.grid-mesas b{aspect-ratio:1;background:var(--soft);border:2px solid var(--edge)}
+.grid-mesas b.on{background:var(--accent)}
+.dev-label{font:500 11px var(--mono);color:var(--muted);text-align:center;margin-top:10px;text-transform:uppercase;letter-spacing:.06em}
+
+/* Sensores del robot */
+.ring{width:200px;max-width:100%;height:auto}
+.sensors{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.sensors i{width:16px;height:16px;border-radius:50%;border:3px solid var(--edge)}
+.sensors i.on{background:var(--ink)}
+
+/* Stock de Copa Açaí */
+.stock{width:100%;max-width:260px;display:grid;gap:10px}
+.stock div{display:grid;grid-template-columns:1fr 64px;gap:10px;align-items:center}
+.stock b{height:12px;background:var(--soft);border:2px solid var(--edge);position:relative;overflow:hidden}
+.stock b::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--lvl);background:var(--ink)}
+.stock em{font:500 11px var(--mono);font-style:normal;text-transform:uppercase;text-align:center;padding:2px 0;border:2px solid var(--edge)}
+.stock em.low{background:var(--accent);color:var(--accent-ink);border-color:var(--edge)}
+
+/* Tecnologías */
+.stack{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:28px;border-top:3px solid var(--edge)}
+.stack > div{padding:18px 20px 20px 0;border-bottom:3px solid var(--edge);min-width:0}
+.stack > div:nth-child(odd){border-right:3px solid var(--edge)}
+.stack > div:nth-child(even){padding-left:20px}
+.stack h3{font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px}
+.stack p{font-weight:700;font-stretch:108%;font-size:20px;line-height:1.35}
+
+/* Formación y actividades */
+.rows{list-style:none;margin:28px 0 0;padding:0;border-top:3px solid var(--edge)}
+.rows li{display:grid;grid-template-columns:150px 1fr;gap:16px;padding-block:16px;border-bottom:1px solid var(--edge)}
+.rows li > *{min-width:0}
+.rows time{font:500 14px var(--mono);font-variant-numeric:tabular-nums;padding-top:3px}
+.rows h3{font-size:19px;font-weight:700;line-height:1.3}
+.rows p{color:var(--muted);margin-top:2px}
+.rows a.inline{color:var(--ink);font-weight:700;text-decoration-color:var(--accent);text-decoration-thickness:3px;text-underline-offset:3px;white-space:nowrap}
+.langs{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+.langs div{display:flex;align-items:stretch;border:3px solid var(--edge);box-shadow:5px 5px 0 var(--edge);background:var(--paper)}
+.langs b{padding:8px 14px;font-weight:700}
+.langs span{padding:8px 12px;background:var(--plate);color:var(--plate-ink);font:500 15px var(--mono)}
+.sub-label{font-weight:800;font-stretch:115%;text-transform:uppercase;font-size:18px;margin-top:44px}
+
+/* Contacto */
+.contact{background:var(--plate);color:var(--plate-ink);border:3px solid var(--edge);box-shadow:10px 10px 0 var(--accent);margin-top:28px;display:grid;grid-template-columns:1fr 1.15fr}
+.contact > *{min-width:0}
+.c-info{padding:30px 28px}
+.c-info{container-type:inline-size}
+.c-info h3{font-weight:900;font-stretch:120%;text-transform:uppercase;font-size:clamp(30px,4.4vw,46px);font-size:min(46px,10cqi);line-height:.95}
+.c-info p{margin-top:16px;max-width:40ch}
+.mail{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.mail code{font:500 17px var(--mono);user-select:all;overflow-wrap:anywhere}
+.copy{font:700 14px var(--font);background:transparent;color:var(--plate-ink);border:2px solid var(--plate-ink);padding:6px 12px;cursor:pointer}
+.copy:hover{background:var(--plate-ink);color:var(--plate)}
+.socials{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:18px;font-weight:700}
+.socials a{text-underline-offset:4px;text-decoration-color:var(--accent);text-decoration-thickness:2px}
+.cform{background:var(--paper);color:var(--ink);padding:28px;display:grid;gap:16px;border-left:3px solid var(--edge)}
+.field{display:grid;gap:5px}
+.field label{font-weight:700;font-size:15px}
+.opt{font-weight:400;color:var(--muted)}
+.field input,.field textarea{width:100%;font:400 16px var(--font);color:var(--ink);background:var(--bg);border:3px solid var(--edge);border-radius:0;padding:10px 12px;resize:vertical}
+.field input:focus,.field textarea:focus{outline:none;box-shadow:4px 4px 0 var(--accent)}
+.field.bad input,.field.bad textarea{border-color:var(--warn)}
+.err{color:var(--warn);font-size:14px}
+.meta{display:flex;justify-content:space-between;gap:12px}
+.count{margin-left:auto;font:400 12px var(--mono);color:var(--muted)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.send{justify-self:start;font:800 16px var(--font);background:var(--accent);color:var(--accent-ink);border:3px solid var(--edge);padding:12px 24px;box-shadow:5px 5px 0 var(--edge);cursor:pointer}
+.send:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--edge)}
+.send[disabled]{opacity:.6;cursor:wait}
+.status-msg{font-size:15px;padding:10px 12px;border:2px solid var(--ok)}
+.status-msg.ko{border-color:var(--warn)}
+
+footer{border-top:3px solid var(--edge);margin-top:24px;padding-block:22px 36px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:400 13px var(--mono);color:var(--muted)}
+
+@media (max-width:860px){
+  .hero,.proj,.contact{grid-template-columns:1fr}
+  .proj-visual{border-left:0;border-top:3px solid var(--edge)}
+  .cform{border-left:0;border-top:3px solid var(--edge)}
+}
+@media (max-width:600px){
+  :root{--rail:32px}
+  .track{gap:0 26px}
+  .rail::before{width:5px}
+  .bot{width:32px;height:47px;top:calc(50vh - 23px)}
+  .label{margin-left:calc(-16px - var(--rail) / 2 - 3px)}
+  h1{font-stretch:108%}
+  .hero{padding-block:40px}
+  .proj-text,.c-info,.cform{padding:22px 18px}
+  .proj{box-shadow:5px 5px 0 var(--edge)}
+  .stack{grid-template-columns:1fr}
+  .stack > div:nth-child(odd){border-right:0}
+  .stack > div:nth-child(even){padding-left:0}
+  .rows li{grid-template-columns:1fr;gap:2px}
+  .bar nav{gap:4px 14px;font-size:14px}
+  .brand{display:none}
+  .contact{box-shadow:6px 6px 0 var(--accent)}
+}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="#inicio">A. NASRI ESCARTI</a>
+    <nav aria-label="Sections">
+      <a href="#proyectos">Projects</a>
+      <a href="#tecnologias">Skills</a>
+      <a href="#formacion">Education</a>
+      <a href="#contacto">Contact</a>
+      <a class="lang-btn" href="../" hreflang="es" lang="es" aria-label="Ver en español">ES</a>
+      <button class="theme-btn" type="button" id="theme-btn" aria-label="Switch to light mode"><span aria-hidden="true">☀</span><span class="tl">Light</span></button>
+    </nav>
+  </div>
+</header>
+<div class="stripe" aria-hidden="true"></div>
+
+<div class="wrap">
+  <div class="track">
+    <div class="rail" aria-hidden="true"><div class="bot"><svg viewBox="0 0 48 70"><rect x="9" y="3" width="30" height="52" rx="3" fill="#141416" stroke="var(--ink)" stroke-width="2"/><rect x="0" y="5" width="9" height="17" rx="2.5" fill="#202024" stroke="var(--ink)" stroke-width="1.5"/><line x1="7.5" y1="7" x2="1.5" y2="10" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="7.5" y1="11" x2="1.5" y2="14" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="7.5" y1="15" x2="1.5" y2="18" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="7.5" y1="19" x2="1.5" y2="22" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><rect x="39" y="5" width="9" height="17" rx="2.5" fill="#202024" stroke="var(--ink)" stroke-width="1.5"/><line x1="40.5" y1="7" x2="46.5" y2="10" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="40.5" y1="11" x2="46.5" y2="14" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="40.5" y1="15" x2="46.5" y2="18" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="40.5" y1="19" x2="46.5" y2="22" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><rect x="0" y="36" width="9" height="17" rx="2.5" fill="#202024" stroke="var(--ink)" stroke-width="1.5"/><line x1="1.5" y1="38" x2="7.5" y2="41" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="1.5" y1="42" x2="7.5" y2="45" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="1.5" y1="46" x2="7.5" y2="49" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="1.5" y1="50" x2="7.5" y2="53" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><rect x="39" y="36" width="9" height="17" rx="2.5" fill="#202024" stroke="var(--ink)" stroke-width="1.5"/><line x1="46.5" y1="38" x2="40.5" y2="41" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="46.5" y1="42" x2="40.5" y2="45" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="46.5" y1="46" x2="40.5" y2="49" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="46.5" y1="50" x2="40.5" y2="53" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><rect x="13" y="9" width="22" height="25" rx="1.5" fill="#1F5FA8" stroke="#0B0B0D" stroke-width="1"/><rect x="21" y="17" width="7" height="8" fill="#0B0B0D"/><path d="M15 14 C 20 4, 26 30, 33 12" fill="none" stroke="#E5484D" stroke-width="1.4"/><path d="M15 30 C 22 20, 26 36, 33 26" fill="none" stroke="#F2B705" stroke-width="1.4"/><path d="M17 12 C 24 26, 28 8, 31 31" fill="none" stroke="#3FB950" stroke-width="1.2"/><path d="M14 22 C 20 30, 30 14, 34 20" fill="none" stroke="#58A6FF" stroke-width="1.2"/><rect x="13" y="38" width="22" height="11" rx="1.5" fill="#1F5FA8" stroke="#0B0B0D" stroke-width="1"/><circle cx="18.5" cy="43.5" r="4" fill="#F1F1F1" stroke="#0B0B0D" stroke-width="1.2"/><circle cx="29.5" cy="43.5" r="4" fill="#F1F1F1" stroke="#0B0B0D" stroke-width="1.2"/><rect x="11" y="57" width="26" height="6" rx="1" fill="#141416" stroke="var(--ink)" stroke-width="1.2"/><circle cx="15" cy="60" r="1.6" fill="#3FE06A"/><rect x="19.5" y="59" width="2" height="2" fill="#5A5E68"/><rect x="22.9" y="59" width="2" height="2" fill="#5A5E68"/><rect x="26.3" y="59" width="2" height="2" fill="#5A5E68"/><rect x="29.7" y="59" width="2" height="2" fill="#5A5E68"/><rect x="33.1" y="59" width="2" height="2" fill="#5A5E68"/></svg></div></div>
+    <main class="content">
+
+      <section class="hero" id="inicio">
+        <div class="hero-main">
+          <h1><span>Adrián</span><span class="acc">Nasri</span><span class="acc">Escarti</span></h1>
+          <p class="lead">Multiplatform App Development student. Backend is what I enjoy most, but I also build desktop and Android apps, and I programmed a robot for a competition.</p>
+          <div class="cta">
+            <a class="btn primary" href="#proyectos">See projects</a>
+            <a class="btn" href="#contacto">Get in touch</a>
+          </div>
+        </div>
+        <aside class="ficha" aria-label="Summary">
+          <h2>At a glance</h2>
+          <dl>
+            <dt>Studying</dt><dd>Multiplatform App Dev · since 2025</dd>
+            <dt>Interested in</dt><dd>Backend: Java, Python, C++, Node.js</dd>
+            <dt>Now</dt><dd>Final project: a POS system for restaurants</dd>
+            <dt>Latest challenge</dt><dd>ASTI Robotics Challenge 2026 final</dd>
+            <dt>Looking for</dt><dd>A developer internship</dd>
+          </dl>
+        </aside>
+      </section>
+
+      <section id="proyectos">
+        <h2 class="label">Projects</h2>
+        <div class="projects">
+
+          <article class="proj">
+            <div class="proj-text">
+              <div class="proj-head"><h3>Restaurant POS</h3><span class="status live">In progress</span></div>
+              <p>My final project for the course. A point-of-sale system with a central server and a single app with two modes: <b>till</b> on a PC or tablet, and <b>order taking</b> on the waiters' phones.</p>
+              <p>The server exposes a REST API and stores tables, orders, payments and till shifts in PostgreSQL. Money is stored in cents to avoid rounding errors. The tests spin up a real database with Testcontainers and run on GitHub Actions.</p>
+              <div class="tech"><span>Kotlin</span><span>Compose Multiplatform</span><span>Node.js</span><span>TypeScript</span><span>Express</span><span>Prisma</span><span>PostgreSQL</span><span>Docker</span></div>
+              <div class="links"><span class="private">Private repository until it's finished</span></div>
+            </div>
+            <div class="proj-visual">
+              <div style="width:100%">
+                <div class="devices" aria-hidden="true">
+                  <div style="flex:1;max-width:250px"><div class="dev desk"><div class="bar"><i></i><i></i><i></i></div><div class="body"><div class="side"><div class="blk a"></div><div class="blk t"></div><div class="blk t"></div><div class="blk t"></div></div><div class="main"><div class="grid-mesas"><b></b><b class="on"></b><b></b><b class="on"></b><b></b><b></b></div><div class="blk t"></div><div class="blk a"></div></div></div></div><div class="dev-label">Till</div></div>
+                  <div><div class="dev phone"><div class="blk a"></div><div class="blk t"></div><div class="blk"></div><div class="blk"></div><div class="blk"></div><div class="blk t"></div></div><div class="dev-label">Orders</div></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="proj">
+            <div class="proj-text">
+              <div class="proj-head"><h3>ASTI Robotics Challenge robot</h3><span class="status">2026 final · Burgos</span></div>
+              <p>I programmed an Osoyoo M2 robot with mecanum wheels, writing a separate program for each event:</p>
+              <ul class="tests">
+                <li><b>Mini sumo.</b> Push the opponent out of the ring without leaving it. Five line sensors watch the edge and the ultrasonic sensor looks for the opponent. A second version mounts the sensor on a servo that sweeps like a radar.</li>
+                <li><b>Line follower.</b> Follows a black line through smooth curves and, if it loses it, turns towards the side where it last saw it.</li>
+                <li><b>Shapes.</b> Draws a square, a rectangle and a triangle by timing distances and turns, because the robot has no encoders.</li>
+              </ul>
+              <div class="tech"><span>C++</span><span>Arduino Mega</span><span>IR sensors</span><span>Ultrasonic sensor</span><span>Servo</span></div>
+              <div class="links"><a href="robot.html">How I solved each event →</a><a href="https://github.com/adriannasri/robot" target="_blank" rel="noopener">Code on GitHub ↗</a><a href="https://open.spotify.com/episode/4vZnDFgYJV0GDE8bqFVGir" target="_blank" rel="noopener">Listen to the podcast (Spanish) ↗</a></div>
+            </div>
+            <figure class="proj-visual photo">
+              <img src="../media/robot-cerca.jpg" alt="The Osoyoo M2 robot on the line-follower track, with its line sensor bar lit up" width="1100" height="1147" loading="lazy">
+              <figcaption>On the line-follower track</figcaption>
+            </figure>
+          </article>
+
+          <article class="proj">
+            <div class="proj-text">
+              <div class="proj-head"><h3>Copa Açaí</h3><span class="status">Team project</span></div>
+              <p>Built during the Málaga Business Bootcamp, five days working with participants from the Netherlands. We analysed the needs of a real business and designed a web app to manage its stock.</p>
+              <p>Staff log in, add products and keep a restock list that updates instantly across every device.</p>
+              <div class="tech"><span>Vue 3</span><span>Vue Router</span><span>Firebase Auth</span><span>Firestore</span><span>Vite</span></div>
+              <div class="links"><a href="https://github.com/Scripty2k/Copa_Acai" target="_blank" rel="noopener">Code on GitHub ↗</a></div>
+            </div>
+            <div class="proj-visual">
+              <div aria-hidden="true" style="width:100%;display:grid;justify-items:center">
+                <div class="stock">
+                  <div><b style="--lvl:82%"></b><em>OK</em></div>
+                  <div><b style="--lvl:18%"></b><em class="low">Restock</em></div>
+                  <div><b style="--lvl:64%"></b><em>OK</em></div>
+                  <div><b style="--lvl:9%"></b><em class="low">Restock</em></div>
+                  <div><b style="--lvl:47%"></b><em>OK</em></div>
+                </div>
+                <p class="vis-cap">Restock list</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section id="tecnologias">
+        <h2 class="label">Skills</h2>
+        <div class="stack">
+          <div><h3>Languages</h3><p>Java, Python, C++, Kotlin, TypeScript, SQL</p></div>
+          <div><h3>Backend</h3><p>Node.js, Express, Spring Boot, APIs REST, PostgreSQL, Prisma</p></div>
+          <div><h3>Apps &amp; web</h3><p>Compose Multiplatform, Android Studio, Vue, HTML, CSS, JavaScript</p></div>
+          <div><h3>Tools</h3><p>Git, GitHub Actions, Docker, JUnit, Vitest, IntelliJ IDEA</p></div>
+        </div>
+      </section>
+
+      <section id="formacion">
+        <h2 class="label">Education</h2>
+        <ol class="rows">
+          <li><time>2025 – now</time><div><h3>Higher VET Diploma in Multiplatform Application Development (DAM)</h3><p>Digitech FP · In progress. Programming, databases, data access, user interfaces, services and processes, and mobile development.</p></div></li>
+          <li><time>2022 – 2025</time><div><h3>Bachelor's in Industrial Technology Engineering</h3><p>Not completed. University of Málaga.</p></div></li>
+          <li><time>2020 – 2022</time><div><h3>Bachelor's in Electrical Engineering</h3><p>Not completed. University of Málaga.</p></div></li>
+          <li><time>2018 – 2020</time><div><h3>Spanish Baccalaureate, Science track</h3></div></li>
+        </ol>
+
+        <h3 class="sub-label">Activities</h3>
+        <ol class="rows">
+          <li><time>2026</time><div><h3>ASTI Robotics Challenge</h3><p>Took part in the competition and reached the final in Burgos.</p></div></li>
+          <li><time>May 2026</time><div><h3>Podcast Código Abierto · Digitech FP</h3><p>I was a guest on the episode “Rumbo a la final: robótica y tecnología en ASTI Robotics Challenge” (in Spanish), about how we prepared for the final. <a class="inline" href="https://open.spotify.com/episode/4vZnDFgYJV0GDE8bqFVGir" target="_blank" rel="noopener">Listen on Spotify ↗</a></p></div></li>
+          <li><time>Certificate</time><div><h3>Málaga Business Bootcamp</h3><p>Five days analysing the needs of a real business and designing a solution: a stock management system.</p></div></li>
+        </ol>
+
+        <h3 class="sub-label">Languages</h3>
+        <div class="langs">
+          <div><b>Spanish</b><span>Native</span></div>
+          <div><b>English</b><span>C1</span></div>
+          <div><b>Moroccan Arabic (Darija)</b><span>B2 spoken · learning to read and write</span></div>
+        </div>
+      </section>
+
+      <section id="contacto">
+        <h2 class="label">Contact</h2>
+        <div class="contact">
+          <div class="c-info">
+            <h3>Let's talk</h3>
+            <p>If you have an internship, a job offer or a project where I could fit in, drop me a message and I'll reply to the email you leave.</p>
+            <div class="mail"><code id="email">nasriadrian1@gmail.com</code><button class="copy" id="copy" type="button">Copy email</button></div>
+            <div class="socials"><a href="https://github.com/adriannasri" target="_blank" rel="noopener">github.com/adriannasri ↗</a><a href="https://www.linkedin.com/in/adrian-nasri-escarti/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+          </div>
+
+          <form class="cform" id="cform" novalidate>
+            <div class="field">
+              <label for="c-nombre">Name</label>
+              <input id="c-nombre" name="name" type="text" autocomplete="name" required maxlength="80">
+              <small class="err" id="e-nombre" hidden>Please enter your name.</small>
+            </div>
+            <div class="field">
+              <label for="c-email">Email</label>
+              <input id="c-email" name="email" type="email" autocomplete="email" required maxlength="120">
+              <small class="err" id="e-email" hidden>Please check your email address: I need it to reply.</small>
+            </div>
+            <div class="field">
+              <label for="c-empresa">Company <span class="opt">(optional)</span></label>
+              <input id="c-empresa" name="empresa" type="text" autocomplete="organization" maxlength="80">
+            </div>
+            <div class="field">
+              <label for="c-mensaje">Message</label>
+              <textarea id="c-mensaje" name="message" rows="5" required maxlength="2000"></textarea>
+              <div class="meta"><small class="err" id="e-mensaje" hidden>Your message is too short.</small><small class="count" id="c-count">0 / 2000</small></div>
+            </div>
+            <input type="checkbox" name="botcheck" id="c-bot" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button class="send" id="c-send" type="submit">Send message</button>
+            <div class="status-msg" id="c-status" role="status" aria-live="polite" hidden></div>
+          </form>
+        </div>
+      </section>
+
+      <footer><span>© 2026 Adrián Nasri Escarti</span><a href="#inicio">Back to top ↑</a></footer>
+    </main>
+  </div>
+</div>
+
+<script>
+document.getElementById('copy').addEventListener('click', function(){
+  var btn=this, text=document.getElementById('email').textContent;
+  function done(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy email'},1800)}
+  function fallback(){var r=document.createRange();r.selectNodeContents(document.getElementById('email'));var s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Select it and copy'}
+  try{navigator.clipboard.writeText(text).then(done,fallback)}catch(e){fallback()}
+});
+
+/* Formulario de contacto: Web3Forms reenvía cada mensaje a mi correo.
+   Clave pública de Web3Forms (se obtiene gratis en web3forms.com con mi email). */
+var WEB3FORMS_KEY = "abcbb10e-8af5-4bf7-8fe7-def2d9bdbc04";
+
+(function(){
+  var f=document.getElementById('cform'), send=document.getElementById('c-send'), st=document.getElementById('c-status');
+  var nombre=document.getElementById('c-nombre'), email=document.getElementById('c-email'), msg=document.getElementById('c-mensaje'), count=document.getElementById('c-count');
+  msg.addEventListener('input',function(){count.textContent=msg.value.length+' / 2000'});
+  function check(input,errId,ok){var e=document.getElementById(errId);input.parentNode.classList.toggle('bad',!ok);e.hidden=ok;return ok}
+  [nombre,email,msg].forEach(function(i){i.addEventListener('input',function(){if(i.parentNode.classList.contains('bad'))validate(i)})});
+  function validate(only){
+    var r=true;
+    if(!only||only===nombre) r=check(nombre,'e-nombre',nombre.value.trim().length>1)&&r;
+    if(!only||only===email) r=check(email,'e-email',/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim()))&&r;
+    if(!only||only===msg) r=check(msg.parentNode.querySelector('textarea'),'e-mensaje',msg.value.trim().length>=10)&&r;
+    return r;
+  }
+  function show(kind,text){st.hidden=false;st.className='status-msg '+kind;st.textContent=text}
+  function fail(){show('ko','The message could not be sent. Please email me directly at nasriadrian1@gmail.com and I\'ll get back to you.')}
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault(); st.hidden=true;
+    if(!validate()){var b=f.querySelector('.bad input, .bad textarea'); if(b) b.focus(); return}
+    if(document.getElementById('c-bot').checked) return;
+    if(!WEB3FORMS_KEY){fail();return}
+    var empresa=document.getElementById('c-empresa').value.trim();
+    send.disabled=true; send.textContent='Sending…';
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({access_key:WEB3FORMS_KEY,subject:'Portfolio (EN) · Message from '+nombre.value.trim(),from_name:'Portfolio Adrián Nasri Escarti',
+        name:nombre.value.trim(),email:email.value.trim(),empresa:empresa||'—',message:msg.value.trim(),botcheck:false})})
+    .then(function(r){return r.json()})
+    .then(function(d){if(d&&d.success){f.reset();count.textContent='0 / 2000';show('ok','Message sent. I\'ll reply to the email you left.')}else fail()})
+    .catch(fail)
+    .finally(function(){send.disabled=false;send.textContent='Send message'});
+  });
+})();
+</script>
+<script>
+/* Ruedas del robot: los rodillos se desplazan al hacer scroll, como si rodara por la pista. */
+(function(){
+  var svg=document.querySelector('.bot svg'); if(!svg) return;
+  var NS='http://www.w3.org/2000/svg', groups=[], STEP=4;
+  [].slice.call(svg.querySelectorAll('rect')).filter(function(r){return r.getAttribute('width')==='9'}).forEach(function(wheel,i){
+    var lines=[], n=wheel.nextElementSibling;
+    while(n && n.tagName.toLowerCase()==='line'){lines.push(n); n=n.nextElementSibling}
+    if(!lines.length) return;
+    var clip=document.createElementNS(NS,'clipPath'); clip.id='rueda-'+i;
+    var cr=wheel.cloneNode(false); cr.removeAttribute('stroke'); cr.removeAttribute('stroke-width'); clip.appendChild(cr);
+    svg.insertBefore(clip, svg.firstChild);
+    var outer=document.createElementNS(NS,'g'); outer.setAttribute('clip-path','url(#rueda-'+i+')');
+    var g=document.createElementNS(NS,'g'); outer.appendChild(g);
+    wheel.parentNode.insertBefore(outer, lines[0]);
+    lines.forEach(function(l){
+      /* Misma inclinación en las cuatro ruedas para que todas parezcan girar en el mismo sentido. */
+      var x1=+l.getAttribute('x1'),y1=+l.getAttribute('y1'),x2=+l.getAttribute('x2'),y2=+l.getAttribute('y2');
+      if((x1-x2)*(y1-y2)>0){l.setAttribute('x1',x2);l.setAttribute('x2',x1);}
+      g.appendChild(l);
+      [-2,-1,1,2,3,4,-3,-4].forEach(function(k){var c=l.cloneNode(false);
+        c.setAttribute('y1',+l.getAttribute('y1')+k*STEP); c.setAttribute('y2',+l.getAttribute('y2')+k*STEP); g.appendChild(c);});
+    });
+    groups.push(g);
+  });
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  /* Se avanza según el sentido del scroll, con un tope por fotograma para que
+     un scroll rápido no haga parecer que las ruedas giran al revés. */
+  var off=0, lastY=window.scrollY, ticking=false;
+  function update(){ticking=false; var y=window.scrollY, d=y-lastY; lastY=y; if(!d) return;
+    var mv=Math.min(Math.abs(d)*0.12, 1.2); off=(off+(d>0?1:-1)*mv)%STEP; if(off<0) off+=STEP;
+    groups.forEach(function(g){g.setAttribute('transform','translate(0 '+(-off)+')')});}
+  window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('theme-btn'); if(!b) return;
+  function paint(){var dark=document.documentElement.getAttribute('data-theme')!=='light';
+    b.querySelector('span').textContent=dark?'☀':'☾'; b.querySelector('.tl').textContent=dark?'Light':'Dark';
+    b.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');}
+  b.addEventListener('click',function(){var next=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
+    document.documentElement.setAttribute('data-theme',next); try{localStorage.setItem('tema',next)}catch(e){} paint();});
+  paint();
+})();
+</script>
+</body>
+</html>

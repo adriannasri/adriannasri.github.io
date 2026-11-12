@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta name="color-scheme" content="dark light">
+<script>/* Theme: dark by default; the visitor's choice is remembered. */(function(){var t="dark";try{t=localStorage.getItem("tema")||"dark"}catch(e){}document.documentElement.setAttribute("data-theme",t)})();</script>
+<meta charset="utf-8">
+<link rel="alternate" hreflang="es" href="https://adriannasri.github.io/robot.html">
+<link rel="alternate" hreflang="en" href="https://adriannasri.github.io/en/robot.html">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%2314213D%22/%3E%3Crect x=%229%22 y=%225%22 width=%2214%22 height=%2222%22 rx=%222%22 fill=%22%23F2B705%22/%3E%3Crect x=%224%22 y=%227%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3Crect x=%2224%22 y=%227%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3Crect x=%224%22 y=%2218%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3Crect x=%2224%22 y=%2218%22 width=%224%22 height=%228%22 rx=%221%22 fill=%22%23F7F6F2%22/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>ASTI Robot · Adrián Nasri Escarti</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: misma identidad que el portfolio; una sección por prueba con "qué hace", parámetros reales y "por qué" */
+:root{
+  --bg:#FFF6D5; --surface:#FFFDF5; --ink:#1B2236; --muted:#575D72; --line:#EADDA0;
+  --accent:#2A45C9; --accent-soft:#FFE07A; --ok:#2F7A3D; --warn:#B4431A;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121522; --surface:#1A1F31; --ink:#F4F1E4; --muted:#A3A8BC; --line:#2A3047;
+  --accent:#FFD54A; --accent-soft:#2D3354; --ok:#7FD08F; --warn:#F0A060; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121522; --surface:#1A1F31; --ink:#F4F1E4; --muted:#A3A8BC; --line:#2A3047;
+  --accent:#FFD54A; --accent-soft:#2D3354; --ok:#7FD08F; --warn:#F0A060; color-scheme:dark}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:960px;margin:0 auto}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.015em}
+p{margin:0}
+code,.mono{font-family:var(--mono);font-size:.88em}
+code{background:var(--accent-soft);padding:1px 6px;border-radius:5px}
+
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-block:18px;border-bottom:1px solid var(--line)}
+.back{font:600 14px var(--mono);text-decoration:none;color:var(--ink)}
+.back:hover{color:var(--accent)}
+.repo{font:600 14px var(--body)}
+
+.hero{padding-block:56px 40px}
+.eyebrow{font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+h1{font-size:clamp(38px,6.5vw,68px);font-weight:800;line-height:1;letter-spacing:-.03em}
+.lead{font-size:19px;color:var(--muted);max-width:60ch;margin-top:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.chips a{font:600 14px var(--body);text-decoration:none;color:var(--ink);border:1px solid var(--ink);border-radius:999px;padding:8px 16px}
+.chips a:hover{background:var(--ink);color:var(--bg)}
+
+.hw{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.hw div{background:var(--surface);padding:14px 16px;min-width:0}
+.hw b{display:block;font-weight:600}
+.hw span{color:var(--muted);font-size:14px}
+.hw .pin{font:500 12px var(--mono);color:var(--accent);display:block;margin-top:4px}
+
+section.prueba{padding-block:64px;border-top:1px solid var(--line);margin-top:56px}
+section.prueba + section.prueba{margin-top:0}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+h2{font-size:clamp(28px,4.4vw,42px);font-weight:800;line-height:1.1}
+.intro{max-width:65ch;font-size:17px}
+.intro + .intro{margin-top:12px}
+h3{font-size:20px;font-weight:600;margin:36px 0 14px}
+.code-links{display:flex;flex-wrap:wrap;gap:8px}
+.code-links a{font:500 13px var(--mono);text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 11px;color:var(--ink)}
+.code-links a:hover{border-color:var(--accent);color:var(--accent)}
+
+.prio{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:p}
+.prio li{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.prio li > div{min-width:0}
+.prio li::before{counter-increment:p;content:counter(p);font:800 24px/1 var(--display);color:var(--accent);text-align:center;padding-top:2px}
+.prio b{display:block}
+.prio span{color:var(--muted);font-size:15px}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:15px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font:600 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.why{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.why li{border-left:3px solid var(--accent);padding:2px 0 2px 16px}
+.why b{display:block;margin-bottom:2px}
+.why span{color:var(--muted)}
+
+.patterns{display:grid;gap:8px}
+.pat{display:grid;grid-template-columns:auto auto 1fr;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.pat > *{min-width:0}
+.dots{display:flex;gap:5px}
+.dots i{width:16px;height:16px;border-radius:50%;border:2px solid var(--muted)}
+.dots i.on{background:var(--ink);border-color:var(--ink)}
+.bits{font:600 13px var(--mono);color:var(--muted)}
+.act b{font-weight:600}
+.act span{color:var(--muted);font-size:14px;display:block}
+
+.note{background:var(--accent-soft);border-radius:12px;padding:16px 18px;max-width:70ch}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cols > div{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.card h4{margin:0 0 6px;font:600 17px var(--display)}
+.card p{color:var(--muted);font-size:15px}
+pre.snip{margin:14px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow-x:auto;font:400 13px/1.7 var(--mono)}
+pre.snip .c{color:var(--muted)}
+
+.adapt{padding-block:56px 0}
+.adapt h2{margin-bottom:12px}
+.map{display:grid;gap:10px;margin-top:24px}
+.row{display:grid;grid-template-columns:1fr auto 1fr auto;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.row > *{min-width:0}
+.tag{display:block;font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+.lim .tag{color:var(--warn)}
+.sol .tag{color:var(--ok)}
+.lim{color:var(--muted);font-size:15px}
+.sol{font-size:15px;font-weight:500}
+.arrow{font:600 20px var(--mono);color:var(--accent)}
+.where{font:500 12px var(--mono);text-decoration:none;white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--muted)}
+.where:hover{color:var(--accent);border-color:var(--accent)}
+.adapt-box{margin-top:24px;background:var(--accent-soft);border-radius:14px;padding:22px}
+.adapt-box p{max-width:68ch}
+.adapt-box p + p{margin-top:10px}
+.adapt-box pre.snip{margin-top:16px}
+
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font:400 13px var(--mono);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:720px){
+  .cols{grid-template-columns:1fr}
+  .pat{grid-template-columns:auto 1fr}
+  .pat .bits{display:none}
+  section.prueba{padding-block:48px}
+  .row{grid-template-columns:1fr}
+  .arrow{transform:rotate(90deg);justify-self:start;line-height:1}
+  .where{justify-self:start}
+}
+
+/* --- Identidad compartida con el portfolio: amarillo, negro y cobalto; bordes negros y sombras duras --- */
+:root{
+  --bg:#F7F6F2; --surface:#FFFFFF; --ink:#14213D; --muted:#586379; --line:#14213D; --edge:#14213D;
+  --accent:#F2B705; --accent-soft:#F3EBCB; --plate:#14213D; --plate-ink:#F7F6F2; --accent-ink:#14213D; --accent-text:#8A6400;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif; --body:"Archivo",Arial,sans-serif; --mono:"DM Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1424; --surface:#161E33; --ink:#ECEFF5; --muted:#A2ACC0; --line:#3B4A6E; --edge:#3B4A6E;
+  --accent:#F5C02E; --accent-soft:#24304A; --plate:#1C2742; --plate-ink:#ECEFF5; --accent-ink:#14213D; --accent-text:#F5C02E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1424; --surface:#161E33; --ink:#ECEFF5; --muted:#A2ACC0; --line:#3B4A6E; --edge:#3B4A6E;
+  --accent:#F5C02E; --accent-soft:#24304A; --plate:#1C2742; --plate-ink:#ECEFF5; --accent-ink:#14213D; --accent-text:#F5C02E; color-scheme:dark}
+body{font-size:17px}
+.top{background:var(--plate);color:var(--plate-ink);border-bottom:0;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.top a,.back{color:var(--plate-ink)}
+.top::after{content:"";display:block}
+.wrap{max-width:1000px}
+.top + .hero{border-top:8px solid transparent;border-image:repeating-linear-gradient(-45deg,var(--plate) 0 12px,var(--accent) 12px 24px) 8}
+h1{font-weight:900;font-stretch:120%;text-transform:uppercase;line-height:.92}
+h2{font-weight:900;font-stretch:115%;text-transform:uppercase;letter-spacing:-.01em}
+h3{font-weight:800;font-stretch:108%}
+.eyebrow{display:inline-block;background:var(--plate);color:var(--plate-ink);padding:4px 10px;letter-spacing:.06em}
+.lead{color:var(--ink)}
+.chips a{border-radius:0;border-width:3px;box-shadow:4px 4px 0 var(--edge);font-weight:700}
+.chips a:hover{background:var(--accent);color:var(--accent-ink);border-color:var(--ink)}
+.hw{border-radius:0;border:3px solid var(--edge);background:var(--edge);gap:3px;box-shadow:8px 8px 0 var(--accent)}
+.hw .pin,.prio li::before,.arrow{color:var(--accent-text)}
+section.prueba{border-top:3px solid var(--edge)}
+.code-links a{border-radius:0;border:2px solid var(--edge);font-weight:500}
+.code-links a:hover{background:var(--accent);color:var(--accent-ink);border-color:var(--ink)}
+.prio li,.pat,.card,.row,.tbl,pre.snip{border-radius:0;border:3px solid var(--edge);box-shadow:5px 5px 0 var(--edge)}
+.prio,.patterns,.map{gap:14px}
+th{background:var(--plate);color:var(--plate-ink)}
+td{border-bottom:1px solid var(--soft-line,var(--edge))}
+.why li{border-left:5px solid var(--accent)}
+.dots i{border-color:var(--ink)}
+.note,.adapt-box{border-radius:0;border:3px solid var(--edge);background:var(--accent-soft);box-shadow:6px 6px 0 var(--edge)}
+.where{border-radius:0;border:2px solid var(--edge);color:var(--ink)}
+.where:hover{background:var(--accent);color:var(--accent-ink)}
+code{border-radius:0;background:var(--accent-soft)}
+footer{border-top:3px solid var(--edge)}
+a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness:3px;text-underline-offset:3px}
+.top a{color:var(--plate-ink)}
+:focus-visible{outline-color:var(--ink)}
+.eyebrow{background:var(--accent);color:var(--accent-ink)}
+.back:hover{color:var(--accent)}
+.where:hover,.code-links a:hover,.chips a:hover{background:var(--accent);color:var(--accent-ink)}
+.code-links a,.chips a{color:var(--ink)}
+.note,.adapt-box{background:var(--accent-soft)}
+.dots i.on{background:var(--ink)}
+
+.media{display:grid;gap:18px;margin:8px 0 48px}
+.media figure,.wide{margin:0;border:3px solid var(--edge);box-shadow:6px 6px 0 var(--edge);background:var(--surface)}
+.media video,.media img,.wide img{display:block;width:100%;height:auto}
+.media .pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.media .pair img{aspect-ratio:1/1;object-fit:cover}
+.media figcaption,.wide figcaption{font-size:14px;color:var(--muted);padding:10px 14px;border-top:3px solid var(--edge)}
+.wide{margin:28px 0 8px}
+@media (max-width:720px){.media .pair{grid-template-columns:1fr}}
+
+
+.pod{display:grid;grid-template-columns:minmax(0,360px) 1fr;gap:32px;align-items:center}
+.pod > *{min-width:0}
+.pod-cover{display:block;border:3px solid var(--edge);box-shadow:8px 8px 0 var(--accent);line-height:0}
+.pod-cover img{width:100%;height:auto;display:block}
+.pod-kicker{font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent-text)}
+.pod-info h3{margin:8px 0 14px;font-size:clamp(22px,2.8vw,30px);line-height:1.15}
+.pod-info p + p{margin-top:10px}
+.pod-info p:not(.pod-kicker){max-width:56ch}
+.pod-btn{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-weight:800;text-decoration:none;background:var(--accent);color:var(--accent-ink);border:3px solid var(--edge);padding:12px 20px;box-shadow:5px 5px 0 var(--edge)}
+.pod-btn:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--edge)}
+@media (prefers-reduced-motion:reduce){.pod-btn:hover{transform:none}}
+@media (max-width:720px){.pod{grid-template-columns:1fr}.pod-cover{max-width:360px}}
+
+/* Pista del siguelíneas, igual que en el portfolio */
+:root{--rail:44px}
+.track{display:grid;grid-template-columns:var(--rail) 1fr;gap:0 52px}
+.rail{position:relative}
+.rail::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:7px;transform:translateX(-50%);background:var(--ink)}
+.bot{position:sticky;top:calc(50vh - 35px);margin:40px auto 0;width:48px;height:70px;z-index:1;display:block}
+.bot svg{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(3px 3px 0 color-mix(in srgb,var(--ink) 25%,transparent))}
+.content{min-width:0}
+@media (max-width:600px){
+  :root{--rail:32px}
+  .track{gap:0 26px}
+  .rail::before{width:5px}
+  .bot{width:32px;height:47px;top:calc(50vh - 23px)}
+}
+.lang-btn{font:inherit;font-size:14px;font-weight:700;line-height:1;color:inherit;text-decoration:none;border:2px solid currentColor;padding:6px 10px;display:inline-flex;align-items:center;letter-spacing:.04em}
+.lang-btn:hover{background:var(--accent);color:var(--accent-ink,#14213D);border-color:var(--accent)}
+.lang-btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.theme-btn{font:inherit;font-size:14px;font-weight:600;line-height:1;color:inherit;background:transparent;border:2px solid currentColor;padding:6px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.theme-btn:hover{background:var(--accent);color:var(--accent-ink,#14213D);border-color:var(--accent)}
+.theme-btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="top">
+    <a class="back" href="index.html">← Adrián's portfolio</a>
+    <a class="repo" href="https://github.com/adriannasri/robot" target="_blank" rel="noopener">Full repository on GitHub ↗</a>
+    <a class="lang-btn" href="../robot.html" hreflang="es" lang="es" aria-label="Ver en español">ES</a>
+      <button class="theme-btn" type="button" id="theme-btn" aria-label="Switch to light mode"><span aria-hidden="true">☀</span><span class="tl">Light</span></button>
+  </nav>
+
+  <div class="track">
+    <div class="rail" aria-hidden="true"><div class="bot"><svg viewBox="0 0 48 70"><rect x="9" y="3" width="30" height="52" rx="3" fill="#141416" stroke="var(--ink)" stroke-width="2"/><rect x="0" y="5" width="9" height="17" rx="2.5" fill="#202024" stroke="var(--ink)" stroke-width="1.5"/><line x1="7.5" y1="7" x2="1.5" y2="10" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="7.5" y1="11" x2="1.5" y2="14" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="7.5" y1="15" x2="1.5" y2="18" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="7.5" y1="19" x2="1.5" y2="22" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><rect x="39" y="5" width="9" height="17" rx="2.5" fill="#202024" stroke="var(--ink)" stroke-width="1.5"/><line x1="40.5" y1="7" x2="46.5" y2="10" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="40.5" y1="11" x2="46.5" y2="14" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="40.5" y1="15" x2="46.5" y2="18" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="40.5" y1="19" x2="46.5" y2="22" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><rect x="0" y="36" width="9" height="17" rx="2.5" fill="#202024" stroke="var(--ink)" stroke-width="1.5"/><line x1="1.5" y1="38" x2="7.5" y2="41" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="1.5" y1="42" x2="7.5" y2="45" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="1.5" y1="46" x2="7.5" y2="49" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="1.5" y1="50" x2="7.5" y2="53" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><rect x="39" y="36" width="9" height="17" rx="2.5" fill="#202024" stroke="var(--ink)" stroke-width="1.5"/><line x1="46.5" y1="38" x2="40.5" y2="41" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="46.5" y1="42" x2="40.5" y2="45" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="46.5" y1="46" x2="40.5" y2="49" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><line x1="46.5" y1="50" x2="40.5" y2="53" stroke="#7D818C" stroke-width="1.6" stroke-linecap="round"/><rect x="13" y="9" width="22" height="25" rx="1.5" fill="#1F5FA8" stroke="#0B0B0D" stroke-width="1"/><rect x="21" y="17" width="7" height="8" fill="#0B0B0D"/><path d="M15 14 C 20 4, 26 30, 33 12" fill="none" stroke="#E5484D" stroke-width="1.4"/><path d="M15 30 C 22 20, 26 36, 33 26" fill="none" stroke="#F2B705" stroke-width="1.4"/><path d="M17 12 C 24 26, 28 8, 31 31" fill="none" stroke="#3FB950" stroke-width="1.2"/><path d="M14 22 C 20 30, 30 14, 34 20" fill="none" stroke="#58A6FF" stroke-width="1.2"/><rect x="13" y="38" width="22" height="11" rx="1.5" fill="#1F5FA8" stroke="#0B0B0D" stroke-width="1"/><circle cx="18.5" cy="43.5" r="4" fill="#F1F1F1" stroke="#0B0B0D" stroke-width="1.2"/><circle cx="29.5" cy="43.5" r="4" fill="#F1F1F1" stroke="#0B0B0D" stroke-width="1.2"/><rect x="11" y="57" width="26" height="6" rx="1" fill="#141416" stroke="var(--ink)" stroke-width="1.2"/><circle cx="15" cy="60" r="1.6" fill="#3FE06A"/><rect x="19.5" y="59" width="2" height="2" fill="#5A5E68"/><rect x="22.9" y="59" width="2" height="2" fill="#5A5E68"/><rect x="26.3" y="59" width="2" height="2" fill="#5A5E68"/><rect x="29.7" y="59" width="2" height="2" fill="#5A5E68"/><rect x="33.1" y="59" width="2" height="2" fill="#5A5E68"/></svg></div></div>
+    <div class="content">
+  <header class="hero">
+    <p class="eyebrow">ASTI Robotics Challenge 2026 · Final in Burgos</p>
+    <h1>The robot, event by event</h1>
+    <p class="lead">I programmed a robot with mecanum wheels in Arduino to compete in the ASTI Robotics Challenge. Each event asked for something different, so I wrote a separate program for each one. Here I explain what each program does and why I solved it that way.</p>
+    <div class="chips">
+      <a href="#adaptar">Code and hardware</a>
+      <a href="#sumo">Mini sumo</a>
+      <a href="#siguelineas">Line follower</a>
+      <a href="#figuras">Shapes</a>
+      <a href="#extras">WiFi control</a>
+      <a href="#podcast">Podcast</a>
+    </div>
+  </header>
+
+
+  <section class="media" aria-label="Photos and video of the robot">
+    <figure class="vid">
+      <video id="vid-sigue" src="../media/siguelineas.mp4" poster="../media/siguelineas-poster.jpg" autoplay muted loop playsinline controls preload="metadata" width="848" height="478"></video>
+      <figcaption>The robot running the line-follower track.</figcaption>
+    </figure>
+    <div class="pair">
+      <figure><img src="../media/robot-cerca.jpg" alt="Close-up of the robot on the track, with the line sensor bar and its green LED lit" width="1100" height="1147" loading="lazy"><figcaption>The line sensor bar, with its green LED, just above the track.</figcaption></figure>
+      <figure><img src="../media/robot-ajustes.jpg" alt="Checking the robot by hand, with the wiring, mecanum wheels and ultrasonic sensor in view" width="1000" height="1027" loading="lazy"><figcaption>Checking the robot between runs: wiring, mecanum wheels and ultrasonic sensor.</figcaption></figure>
+    </div>
+  </section>
+
+  <div class="hw" aria-label="Robot hardware">
+    <div><b>Osoyoo M2</b><span>Chassis with 4 mecanum wheels, each motor with its own speed and direction</span></div>
+    <div><b>Arduino Mega</b><span>Drives the 4 motors via PWM</span><span class="pin">PWM 9 · 10 · 11 · 12</span></div>
+    <div><b>5 IR line sensors</b><span>Read the floor from left to right</span><span class="pin">A4 · A3 · A2 · A1 · A0</span></div>
+    <div><b>Ultrasonic sensor</b><span>Measures the distance to whatever is in front</span><span class="pin">Trig 30 · Echo 31</span></div>
+    <div><b>Servo</b><span>Turns the ultrasonic sensor in the radar version of sumo</span><span class="pin">Pin 13</span></div>
+  </div>
+
+  <section class="adapt" id="adaptar">
+    <h2>Adapting the code to the robot</h2>
+    <p class="intro">A program that looks right on paper is useless if the robot doesn't respond as expected. This chassis has its limits, and a big part of the work was tuning the software to how the hardware actually behaves.</p>
+    <div class="map">
+      <div class="row"><div class="lim"><span class="tag">Hardware</span>No encoders: it can't tell how far each wheel has turned</div><div class="arrow" aria-hidden="true">→</div><div class="sol"><span class="tag">Software</span>Move by time, calibrating how long it takes to travel 1 cm and turn 1°</div><a class="where" href="#figuras">Shapes</a></div>
+      <div class="row"><div class="lim"><span class="tag">Hardware</span>Mecanum wheels slip, so the robot doesn't do exactly what it's told</div><div class="arrow" aria-hidden="true">→</div><div class="sol"><span class="tag">Software</span>Values tuned by testing on paper, and lower speeds</div><a class="where" href="#figuras">Shapes · Sumo</a></div>
+      <div class="row"><div class="lim"><span class="tag">Hardware</span>The ultrasonic sensor loses the opponent when it's right up close</div><div class="arrow" aria-hidden="true">→</div><div class="sol"><span class="tag">Software</span>Blind charge: keep pushing for a few cycles after losing it</div><a class="where" href="#sumo">Sumo</a></div>
+      <div class="row"><div class="lim"><span class="tag">Hardware</span>With a fixed sensor, the robot only sees what's straight ahead</div><div class="arrow" aria-hidden="true">→</div><div class="sol"><span class="tag">Software</span>A version with the sensor on a servo that sweeps like a radar</div><a class="where" href="#sumo">Sumo</a></div>
+      <div class="row"><div class="lim"><span class="tag">Hardware</span>When braking, the robot keeps drifting a little</div><div class="arrow" aria-hidden="true">→</div><div class="sol"><span class="tag">Software</span>Pauses between moves and a full stop before reversing</div><a class="where" href="#figuras">Shapes · Sumo</a></div>
+      <div class="row"><div class="lim"><span class="tag">Hardware</span>Depending on the model, the line sensors give inverted readings</div><div class="arrow" aria-hidden="true">→</div><div class="sol"><span class="tag">Software</span>The edge reading is defined in a single constant that's easy to flip</div><a class="where" href="#sumo">Sumo · Line follower</a></div>
+    </div>
+  </section>
+
+  <!-- MINI SUMO -->
+  <section class="prueba" id="sumo">
+    <div class="head">
+      <h2>Mini sumo</h2>
+      <div class="code-links">
+        <a href="https://github.com/adriannasri/robot/blob/main/sumoV4.0.ino" target="_blank" rel="noopener">sumoV4.0.ino ↗</a>
+        <a href="https://github.com/adriannasri/robot/blob/main/sumoVdefinitiva.ino" target="_blank" rel="noopener">sumoVdefinitiva.ino ↗</a>
+      </div>
+    </div>
+    <p class="intro">Two robots in a ring. Whoever pushes the other out wins. The challenge isn't just pushing: the robot has to find the opponent, go for it and, above all, not drive out on its own.</p>
+    <p class="intro">On every pass of <code>loop()</code> the program decides what to do using a fixed order of priorities:</p>
+
+    <h3>What it does at each moment</h3>
+    <ol class="prio">
+      <li><div><b>Stay in the ring</b><span>If any of the 5 sensors sees the edge line, it brakes, backs up and turns inwards. This is checked before anything else.</span></div></li>
+      <li><div><b>Attack</b><span>If the ultrasonic sensor sees the opponent in range, it drives towards it. When it gets close, it switches to charging speed.</span></div></li>
+      <li><div><b>Blind charge</b><span>If it has just seen the opponent and loses it, it keeps pushing for a few more cycles instead of starting to search.</span></div></li>
+      <li><div><b>Search</b><span>If it sees nothing, it spins on the spot until it finds the opponent.</span></div></li>
+    </ol>
+
+    <h3>Two versions</h3>
+    <p class="intro" style="margin-bottom:16px">I tried two ways of finding the opponent. In the first, the sensor is fixed and the whole robot turns. In the second, the sensor sits on a servo that sweeps from side to side like a radar, and the robot remembers which side it saw the opponent on.</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Parameter</th><th>Fixed sensor (V4.0)</th><th>Servo radar</th></tr></thead>
+        <tbody>
+          <tr><td>Detection distance</td><td class="n">45 cm</td><td class="n">30 cm</td></tr>
+          <tr><td>Charging distance</td><td class="n">20 cm</td><td class="n">40 cm</td></tr>
+          <tr><td>Search speed (0–255)</td><td class="n">100</td><td class="n">120 · 90 while sweeping</td></tr>
+          <tr><td>Attack speed</td><td class="n">140</td><td class="n">120</td></tr>
+          <tr><td>Edge escape speed</td><td class="n">140</td><td class="n">200</td></tr>
+          <tr><td>Blind charge</td><td class="n">25 cycles</td><td class="n">40 head-on · 15 from the side</td></tr>
+          <tr><td>Escape manoeuvre</td><td class="n">350 ms back + 350 ms turn</td><td class="n">300 ms back + 400 ms turn</td></tr>
+          <tr><td>Servo sweep</td><td class="n">—</td><td class="n">40° to 140°, in 10° steps</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Why I did it this way</h3>
+    <ul class="why">
+      <li><b>The edge comes first</b><span>Leaving the ring means losing the bout instantly, so reading the line sensors is the first thing in <code>loop()</code>. However close the opponent is, if the robot touches the edge, it escapes.</span></li>
+      <li><b>Escape to the opposite side</b><span>If the left sensors see the edge, it turns right, and vice versa. If only the centre one sees it, it turns for longer to spin almost all the way round.</span></li>
+      <li><b>A pause before reversing</b><span>It stops for 40–50 ms before backing up. Going straight from forward to reverse is hard on the motors and gearbox.</span></li>
+      <li><b>The blind charge</b><span>The ultrasonic sensor has a blind spot: when the opponent is pressed right against the robot, it stops seeing it. Without this memory, the robot would start searching at the very moment it has the opponent in front of it, pushing.</span></li>
+      <li><b>Low speeds in V4.0</b><span>At higher speeds the robot loses traction and, on impact, momentum can carry it out of the ring itself. Turning more slowly while searching also means it doesn't skip past the opponent between one reading and the next.</span></li>
+      <li><b>Breaking the search loop</b><span>If it spends 5 seconds spinning on the spot without seeing anything, it drives forward for half a second to change position. That way it doesn't keep spinning forever in a spot where it can't see the opponent.</span></li>
+      <li><b>Timers with <code>millis()</code></b><span>The search doesn't use <code>delay()</code> to count those 5 seconds. If it did, the robot would be “asleep” and wouldn't read the edge in the meantime.</span></li>
+      <li><b>No echo doesn't mean 0 cm</b><span>If the ultrasonic sensor gets no echo, the function returns 999 instead of 0. If it returned 0, the robot would think the opponent was right against it and attack thin air.</span></li>
+      <li><b>Only detect inside the ring</b><span>In the radar version I lowered the range to 30 cm so it wouldn't pick up objects outside the ring.</span></li>
+      <li><b>Wait 5 seconds at the start</b><span>The ASTI rules require it, so the robot stays still when it starts.</span></li>
+    </ul>
+  </section>
+
+  <!-- SIGUELÍNEAS -->
+  <section class="prueba" id="siguelineas">
+    <div class="head">
+      <h2>Line follower</h2>
+      <div class="code-links">
+        <a href="https://github.com/adriannasri/robot/blob/main/siguelineasV3.ino" target="_blank" rel="noopener">siguelineasV3.ino ↗</a>
+      </div>
+    </div>
+    <p class="intro">The robot has to complete a circuit following a black line as fast as possible without losing it on the curves.</p>
+    <p class="intro">The 5 sensors are combined into a single 5-bit number, one bit per sensor, from left to right. That way every situation is a number, and the program decides with a <code>switch</code>:</p>
+
+    <figure class="wide"><img src="../media/robot-pista.jpg" alt="The robot on the line-follower track, with curves, straight sections and grids, while the audience watches" width="1400" height="770" loading="lazy"><figcaption>The track: smooth curves, right-angle turns and grids where it's easy to lose the line.</figcaption></figure>
+
+    <h3>What it does depending on what it sees</h3>
+    <div class="patterns">
+      <div class="pat"><div class="dots" aria-label="Centre sensor on the line"><i></i><i></i><i class="on"></i><i></i><i></i></div><span class="bits">00100 · 01110</span><div class="act"><b>Straight at full speed</b><span>Both sides at 255</span></div></div>
+      <div class="pat"><div class="dots" aria-label="Line slightly to the right"><i></i><i></i><i class="on"></i><i class="on"></i><i></i></div><span class="bits">00110 · 00010</span><div class="act"><b>Gentle right curve</b><span>Left at 255, right at 70</span></div></div>
+      <div class="pat"><div class="dots" aria-label="Line slightly to the left"><i></i><i class="on"></i><i class="on"></i><i></i><i></i></div><span class="bits">01100 · 01000</span><div class="act"><b>Gentle left curve</b><span>Left at 70, right at 255</span></div></div>
+      <div class="pat"><div class="dots" aria-label="Line at the far right"><i></i><i></i><i></i><i class="on"></i><i class="on"></i></div><span class="bits">00011 · 00001</span><div class="act"><b>Sharp right turn</b><span>One wheel forward and the other backward, at 100</span></div></div>
+      <div class="pat"><div class="dots" aria-label="Line at the far left"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div><span class="bits">11000 · 10000</span><div class="act"><b>Sharp left turn</b><span>The same, the other way</span></div></div>
+      <div class="pat"><div class="dots" aria-label="No sensor sees the line"><i></i><i></i><i></i><i></i><i></i></div><span class="bits">00000</span><div class="act"><b>Line lost</b><span>Turns towards the side where it last saw it. If it lost it going straight, it backs up slowly</span></div></div>
+    </div>
+
+    <h3>Why I did it this way</h3>
+    <ul class="why">
+      <li><b>One number instead of lots of <code>if</code>s</b><span>With 5 sensors there are many combinations. Turning them into a 5-bit number puts each case on one line of the <code>switch</code>, so you can see at a glance what the robot does in each situation.</span></li>
+      <li><b>No wheel stops on gentle curves</b><span>If I fully stop the inner motor on a curve, the robot jerks and vibrates. Leaving it at 70 instead of 0, it turns smoothly and keeps its speed.</span></li>
+      <li><b>Remembering the last side</b><span>On a sharp curve, the line slips off one side before it disappears. If I store that side, when the robot sees nothing it knows which way to turn to find it again instead of guessing.</span></li>
+      <li><b>Ignoring odd readings</b><span>Combinations that make no sense, like scattered sensors triggered by a reflection, fall into the <code>default</code> case and the robot carries on with what it was doing. That way a one-off bad reading doesn't make it swerve.</span></li>
+    </ul>
+  </section>
+
+  <!-- FIGURAS -->
+  <section class="prueba" id="figuras">
+    <div class="head">
+      <h2>Shapes</h2>
+      <div class="code-links">
+        <a href="https://github.com/adriannasri/robot/blob/main/cuadrado20x20.ino" target="_blank" rel="noopener">cuadrado20x20.ino ↗</a>
+        <a href="https://github.com/adriannasri/robot/blob/main/rectangulo30X10.ino" target="_blank" rel="noopener">rectangulo30X10.ino ↗</a>
+        <a href="https://github.com/adriannasri/robot/blob/main/trinangulo25x25.ino" target="_blank" rel="noopener">trinangulo25x25.ino ↗</a>
+      </div>
+    </div>
+    <p class="intro">The robot has to draw shapes on paper to exact measurements: a square, a rectangle and a triangle.</p>
+    <p class="intro">The problem is that this robot has no encoders, so it can't tell how far each wheel has turned. The solution was to measure with time: I calibrated how long it takes to travel 1 cm and to turn 1 degree, and used that to write two functions that take centimetres and degrees.</p>
+
+    <div class="cols" style="margin-top:24px">
+      <div class="card"><h4>Calibration</h4><p>Travel 1 cm: <b class="mono">75 ms</b> at speed 160.<br>Turn 1°: <b class="mono">6 ms</b> at speed 130.</p></div>
+      <div class="card"><h4>How a shape is drawn</h4><p>Each shape is a list of straight sections and left turns, with a pause between each one. It all goes in <code>setup()</code> so the robot draws it only once.</p></div>
+    </div>
+<div class="adapt-box">
+      <h3 style="margin-top:0">The software was adapted to the robot</h3>
+      <p>This event showed it more than any other. Mecanum wheels have rollers that slip slightly, the motors don't all respond the same way and there are no encoders to correct on the fly. If you ask the robot for 20 cm and 90°, you don't get 20 cm and 90°.</p>
+      <p>So the program had to be fitted to the robot, not the other way round: draw the shape, measure what it had actually done and correct the values until it came out right. That's why the numbers passed to <code>avanzar()</code> (move forward) and <code>girarIzquierda()</code> (turn left) aren't the measurements from the task. They're the ones that work with this robot. For example, to make it really turn 90°, the code asks for 72.</p>
+<pre class="snip"><span class="c">// 90° corner on the paper</span>
+girarIzquierda(72);   <span class="c">// value tuned by testing with the robot</span></pre>
+    </div>
+
+<pre class="snip"><span class="c">// Moves the requested centimetres using the calibrated time</span>
+void avanzar(int centimetros) {
+  forward(MAX_SPEED, MAX_SPEED);
+  delay(centimetros * TIEMPO_1CM);
+  stop_bot();
+}</pre>
+
+    <h3>Why I did it this way</h3>
+    <ul class="why">
+      <li><b>Functions in centimetres and degrees</b><span>That way each shape is written with distances and angles rather than loose milliseconds. If the battery or the surface changes, the robot behaves differently and the values need re-tuning.</span></li>
+      <li><b>400 ms pauses between sections</b><span>When it brakes, the robot still drifts a little. Waiting for it to settle before the next move makes every section and every turn come out the same.</span></li>
+      <li><b>Turning on the spot</b><span>To turn, the wheels on one side go forward and those on the other go backward. That way the robot turns without shifting and the corner stays in place.</span></li>
+      <li><b>3 seconds before starting</b><span>That's the time I have to set it down properly on the paper after switching it on.</span></li>
+    </ul>
+  </section>
+
+  <!-- EXTRAS -->
+  <section class="prueba" id="extras">
+    <div class="head">
+      <h2>WiFi control</h2>
+      <div class="code-links">
+        <a href="https://github.com/adriannasri/robot/blob/main/controlWifi.ino" target="_blank" rel="noopener">controlWifi.ino ↗</a>
+        <a href="https://github.com/adriannasri/robot/blob/main/robot.ino" target="_blank" rel="noopener">robot.ino ↗</a>
+      </div>
+    </div>
+    <p class="intro">Besides the events, the repository includes two examples from the manufacturer. With WiFi control the robot creates its own network and is driven from a phone app, which sends it one letter per button. This is where mecanum wheels shine: as well as moving forward and turning, the robot can move sideways and diagonally without turning its body.</p>
+    <p class="note" style="margin-top:20px">These two programs are based on Osoyoo's tutorials for this chassis. In <code>robot.ino</code> I left my notes while studying it. The mini sumo, line follower and shapes programs are my own.</p>
+  </section>
+
+  <!-- PODCAST -->
+  <section class="prueba" id="podcast">
+    <div class="head"><h2>The podcast</h2></div>
+    <div class="pod">
+      <a class="pod-cover" href="https://open.spotify.com/episode/4vZnDFgYJV0GDE8bqFVGir" target="_blank" rel="noopener"><img src="../media/podcast-portada.jpg" alt="Cover of episode 2 of Código Abierto: Rumbo a la final ASTI Robotics Challenge. Technology, programming and robotics, with four Digitech students" width="500" height="500" loading="lazy"></a>
+      <div class="pod-info">
+        <p class="pod-kicker">Código Abierto · Digitech FP · Episode 2 · May 2026 · 34 min · In Spanish</p>
+        <h3>Rumbo a la final: robótica y tecnología en ASTI Robotics Challenge</h3>
+        <p>Before the final, my school's podcast brought together students from several Digitech teams to talk about how each project started, the technologies we used and what preparing for the competition was like. I took part for the Robolabs team.</p>
+        <a class="pod-btn" href="https://open.spotify.com/episode/4vZnDFgYJV0GDE8bqFVGir" target="_blank" rel="noopener"><span aria-hidden="true">▶</span> Listen on Spotify</a>
+      </div>
+    </div>
+  </section>
+
+    </div>
+  </div>
+
+  <footer>
+    <span>© 2026 Adrián Nasri Escarti</span>
+    <a href="index.html">Back to the portfolio</a>
+  </footer>
+</div>
+<script>
+try{if(matchMedia('(prefers-reduced-motion: reduce)').matches){var v=document.getElementById('vid-sigue');v.removeAttribute('autoplay');v.pause()}}catch(e){}
+</script>
+<script>
+/* Ruedas del robot: los rodillos se desplazan al hacer scroll, como si rodara por la pista. */
+(function(){
+  var svg=document.querySelector('.bot svg'); if(!svg) return;
+  var NS='http://www.w3.org/2000/svg', groups=[], STEP=4;
+  [].slice.call(svg.querySelectorAll('rect')).filter(function(r){return r.getAttribute('width')==='9'}).forEach(function(wheel,i){
+    var lines=[], n=wheel.nextElementSibling;
+    while(n && n.tagName.toLowerCase()==='line'){lines.push(n); n=n.nextElementSibling}
+    if(!lines.length) return;
+    var clip=document.createElementNS(NS,'clipPath'); clip.id='rueda-'+i;
+    var cr=wheel.cloneNode(false); cr.removeAttribute('stroke'); cr.removeAttribute('stroke-width'); clip.appendChild(cr);
+    svg.insertBefore(clip, svg.firstChild);
+    var outer=document.createElementNS(NS,'g'); outer.setAttribute('clip-path','url(#rueda-'+i+')');
+    var g=document.createElementNS(NS,'g'); outer.appendChild(g);
+    wheel.parentNode.insertBefore(outer, lines[0]);
+    lines.forEach(function(l){
+      /* Misma inclinación en las cuatro ruedas para que todas parezcan girar en el mismo sentido. */
+      var x1=+l.getAttribute('x1'),y1=+l.getAttribute('y1'),x2=+l.getAttribute('x2'),y2=+l.getAttribute('y2');
+      if((x1-x2)*(y1-y2)>0){l.setAttribute('x1',x2);l.setAttribute('x2',x1);}
+      g.appendChild(l);
+      [-2,-1,1,2,3,4,-3,-4].forEach(function(k){var c=l.cloneNode(false);
+        c.setAttribute('y1',+l.getAttribute('y1')+k*STEP); c.setAttribute('y2',+l.getAttribute('y2')+k*STEP); g.appendChild(c);});
+    });
+    groups.push(g);
+  });
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  /* Se avanza según el sentido del scroll, con un tope por fotograma para que
+     un scroll rápido no haga parecer que las ruedas giran al revés. */
+  var off=0, lastY=window.scrollY, ticking=false;
+  function update(){ticking=false; var y=window.scrollY, d=y-lastY; lastY=y; if(!d) return;
+    var mv=Math.min(Math.abs(d)*0.12, 1.2); off=(off+(d>0?1:-1)*mv)%STEP; if(off<0) off+=STEP;
+    groups.forEach(function(g){g.setAttribute('transform','translate(0 '+(-off)+')')});}
+  window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('theme-btn'); if(!b) return;
+  function paint(){var dark=document.documentElement.getAttribute('data-theme')!=='light';
+    b.querySelector('span').textContent=dark?'☀':'☾'; b.querySelector('.tl').textContent=dark?'Light':'Dark';
+    b.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');}
+  b.addEventListener('click',function(){var next=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
+    document.documentElement.setAttribute('data-theme',next); try{localStorage.setItem('tema',next)}catch(e){} paint();});
+  paint();
+})();
+</script>
+</body>
+</html>

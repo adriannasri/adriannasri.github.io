@@ -4,12 +4,18 @@
 <meta name="color-scheme" content="dark light">
 <script>/* Tema: oscuro por defecto; se recuerda la elección del visitante. */(function(){var t="dark";try{t=localStorage.getItem("tema")||"dark"}catch(e){}document.documentElement.setAttribute("data-theme",t)})();</script>
 <meta charset="utf-8">
+<link rel="alternate" hreflang="es" href="https://adriannasri.github.io/">
+<link rel="alternate" hreflang="en" href="https://adriannasri.github.io/en/">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>
 :root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 img{max-width:100%}
 [hidden]{display:none!important}
+.lang-btn{font:inherit;font-size:14px;font-weight:700;line-height:1;color:inherit;text-decoration:none;border:2px solid currentColor;padding:6px 10px;display:inline-flex;align-items:center;letter-spacing:.04em}
+.lang-btn:hover{background:var(--accent);color:var(--accent-ink,#14213D);border-color:var(--accent)}
+.lang-btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .theme-btn{font:inherit;font-size:14px;font-weight:600;line-height:1;color:inherit;background:transparent;border:2px solid currentColor;padding:6px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .theme-btn:hover{background:var(--accent);color:var(--accent-ink,#14213D);border-color:var(--accent)}
 .theme-btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
@@ -243,6 +249,7 @@ footer{border-top:3px solid var(--edge);margin-top:24px;padding-block:22px 36px;
       <a href="#tecnologias">Tecnologías</a>
       <a href="#formacion">Formación</a>
       <a href="#contacto">Contacto</a>
+      <a class="lang-btn" href="en/" hreflang="en" lang="en" aria-label="Read in English">EN</a>
       <button class="theme-btn" type="button" id="theme-btn" aria-label="Cambiar a modo claro"><span aria-hidden="true">☀</span><span class="tl">Claro</span></button>
     </nav>
   </div>
